@@ -1,0 +1,30 @@
+page-dashboard{
+    .pos-atob-amount{
+        text-align: center;
+        color: map-get($colors, mintgreen);
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .neg-atob-amount{
+        text-align: center;
+        color: map-get($colors, cardinalred);
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .zero-atob-amount{
+        text-align: center;
+        color: map-get($colors, mediumgray);
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .atob-text{
+        text-align: center;
+        color: map-get($colors, white);
+        font-style: italic;
+        font-weight: lighter;
+    }
+
+    .header-ios .toolbar-ios:last-child .toolbar-background-ios {
+        border-width: 0 0 0px !important;
+    }
+}

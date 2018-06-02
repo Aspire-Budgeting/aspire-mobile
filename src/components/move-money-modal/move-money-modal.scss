@@ -1,0 +1,18 @@
+move-money-modal {
+  .activeArrow{
+    background-color: map-get($colors, buttonblue) !important;
+    border-color: map-get($colors, buttonblue) !important;
+    color: white !important;
+  }
+
+  .inactiveArrow{
+    border-color: white !important;
+    color: white !important;
+    background-color: transparent !important;
+  }
+  
+  .sum-category {
+    @include categoryAmount();
+    background-color: map-get($colors, graphite);
+  }
+}

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color=dark>
+    <ion-title>
+      Accounts
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-background">
+
+  <ion-card *ngIf="accounts.length == 0">
+    <ion-card-content>
+      You haven't added any Accounts yet. Press the '+' button to get started.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor='let account of accounts' [ngClass]="account.cardClass">
+    <ion-card-header class="account-header">
+      <ion-icon (click)="present(account)" class="account-icon" name="ios-settings"></ion-icon>
+      <span class="bubble-text">{{account.name}}</span>
+    </ion-card-header>
+    <ion-card-content class="account-amount">
+      <span [ngClass]="account.amount > 0  ? 'pos-account' : (account.amount < 0 ? 'neg-account' : 'zero-account')" class="bubble-text">{{account.amount/100 | currency}}</span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

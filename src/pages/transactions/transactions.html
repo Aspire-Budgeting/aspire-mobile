@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      Transactions
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeSearchbar()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar *ngIf="showSearchbar" color="graphite" no-border-top>
+    <ion-searchbar [showCancelButton]="true" (ionCancel)="closeSearchbar()" (ionInput)="findItems($event)" placeholder="Filter Items"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="isFiltering == true" class="app-background" #content>
+  <ion-item-divider class="header" color="headercolor">Filtered Transactions</ion-item-divider>
+  <ion-card *ngIf="filterItems.length == 0">
+    <ion-card-content>
+      No transactions found.
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item text-wrap *ngFor='let transaction of filterItems'>
+      <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
+      <ion-label color=dark>{{transaction.name}}
+        <p>{{transaction.date | date:'mediumDate'}}</p>
+      </ion-label>
+      <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+        <span style="float: right;">
+          {{transaction.amount/100 | currency}}</span>
+        <div *ngIf="transferDirection != 'Transfer'" style="padding-top: 28px;"></div>
+        <span *ngIf="transferDirection != 'Transfer'" style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-content *ngIf="isFiltering == false" class="app-background" #content>
+  <ion-item-divider class="header" color="headercolor">Pending Transactions</ion-item-divider>
+  <ion-card *ngIf="pendingTransactions.length == 0">
+    <ion-card-content>
+      You don't have any Pending Transactions.
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item-sliding *ngFor='let transaction of pendingTransactions' #slidingItem>
+      <ion-item text-wrap>
+        <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
+        <ion-label color=dark>{{transaction.name}}
+          <p>{{transaction.date | date:'mediumDate'}}</p>
+        </ion-label>
+        <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+          <span style="float: right;">{{transaction.amount/100 | currency}}</span>
+          <div style="padding-top: 28px;"></div>
+          <span style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+        </ion-note>
+
+      </ion-item>
+      <ion-item-options (ionSwipe)="clear(slidingItem, transaction._id)" side="left">
+        <button class="swipe-buttons" ion-button expandable (click)="clear(slidingItem, transaction._id)">
+          <ion-icon name="md-checkbox"></ion-icon>
+          CLEAR
+        </button>
+      </ion-item-options>
+
+      <ion-item-options side="right">
+        <button ion-button color="dark" (click)="edit(slidingItem, transaction)">
+          <ion-icon name="md-create"></ion-icon>
+          EDIT
+        </button>
+        <button ion-button color="cardinalred" (click)="delete(slidingItem, transaction._id, transaction.sourceCatId, transaction.destCatId, transaction.sourceAcctId, transaction.destAcctId)">
+          <ion-icon name="trash"></ion-icon>
+          DELETE
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-item-divider class="header" color="headercolor">Cleared Transactions</ion-item-divider>
+  <ion-card *ngIf="clearedTransactions.length == 0">
+    <ion-card-content>
+      You don't have any Cleared Transactions.
+    </ion-card-content>
+  </ion-card>
+  <ion-list>
+    <ion-item text-wrap *ngFor='let transaction of clearedTransactions'>
+      <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
+      <ion-label color=dark>{{transaction.name}}
+        <p>{{transaction.date | date:'mediumDate'}}</p>
+      </ion-label>
+      <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+        <span style="float: right;">
+          {{transaction.amount/100 | currency}}</span>
+        <div *ngIf="transferDirection != 'Transfer'" style="padding-top: 28px;"></div>
+        <span *ngIf="transferDirection != 'Transfer'" style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll *ngIf="!noMoreTransactions" (ionInfinite)="$event.waitFor(doInfinite())">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

@@ -1,0 +1,74 @@
+// http://ionicframework.com/docs/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+* {
+  font-family: -apple-system, "Helvetica Neue", sans-serif;
+}
+
+@mixin categoryAmount {
+  background: map-get($colors, light);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 10px;
+  font-weight: bold;
+  border-width: 1px;
+  font-size: 16px;
+  border: solid #F1F2EF;
+}
+
+.pos-category {
+  @include categoryAmount();
+  color: map-get($colors, wintergreen);
+}
+
+.neg-category {
+  @include categoryAmount();
+  color: map-get($colors, cardinalred);
+}
+
+.zero-category {
+  @include categoryAmount();
+  color: map-get($colors, mediumgray);
+}
+
+.normal-category {
+  @include categoryAmount();
+  color: map-get($colors, darkgray);
+}
+
+.transfer-category {
+  @include categoryAmount();
+  color: map-get($colors, buttonblue);
+}
+
+.swipe-buttons {
+  background: map-get($colors, phantomgray);
+}
+
+.header{
+  font-weight: bold;
+  color: map-get($colors, dark);
+}
+
+.app-background{
+  background: map-get($colors, backgroundgray);
+}
+
+.header-right-text{
+  font-size: 14px;
+  font-weight: 300;
+}
+

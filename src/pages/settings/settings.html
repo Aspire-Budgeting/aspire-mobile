@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar color=dark>
+    <ion-title>
+      Settings
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <ion-list>
+    <ion-list-header>
+      Categories
+    </ion-list-header>
+    <ion-item (click)="goToCategoriesPage()">
+      <ion-icon name="ios-arrow-forward" item-end color="mediumgray"></ion-icon>
+      <ion-label color="dark">Add or edit categories</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      General
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="md-information-circle" item-start color="phantomgray"></ion-icon>
+      <ion-label color="dark">About</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      Connect
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="logo-twitter" item-start color="twitter"></ion-icon>
+      <ion-label color="dark">@AspireBudget</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="logo-reddit" item-start color="reddit"></ion-icon>
+      <ion-label color="dark">r/AspireBudgeting</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="md-compass" item-start color="web"></ion-icon>
+      <ion-label color="dark">AspireBudget.com</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

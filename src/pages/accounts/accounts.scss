@@ -1,0 +1,41 @@
+page-accounts {
+    .bubble-text{
+        border-radius: 35px;
+        padding: 3px 11px 3px 11px;
+        background-color:rgba(10, 10, 10, 0.65);
+    }
+    .pos-account {
+        color: map-get($colors, mintgreen);
+    }
+    .neg-account {
+        color: map-get($colors, cardinalred);
+    }
+    .zero-account {
+        color: map-get($colors, mediumgray);
+    }
+    .account-header{
+        font-weight: bold;
+        color: map-get($colors, light);
+    }
+    .account-amount{
+        font-weight: bold;
+        font-size: 24px;
+    }
+    .account-icon{
+        float: right;
+    }
+    .account-card{
+        border-radius: 10px;
+    }
+    .card-color1{background: map-get($colors, seaweedgreen)}
+    .card-color2{background: map-get($colors, lakeblue)}
+    .card-color3{background: map-get($colors, peach)}
+    .card-color4{background: map-get($colors, slategray)}
+    .card-color5{background: map-get($colors, phantomgray)}
+    .card-color6{background: map-get($colors, eggplantpurple)}
+    .card-background1{background-image: url('../../assets/imgs/card_backgrounds/1.png');}
+    .card-background2{background-image: url('../../assets/imgs/card_backgrounds/2.png');}
+    .card-background3{background-image: url('../../assets/imgs/card_backgrounds/3.png');}
+    .card-background4{background-image: url('../../assets/imgs/card_backgrounds/4.png');}
+    .card-background5{background-image: url('../../assets/imgs/card_backgrounds/5.png');}
+}

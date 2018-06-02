@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color=dark>
+    <ion-title>
+      New Category
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+        <ion-icon name="md-checkmark-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <ion-list>
+    <ion-item *ngIf="createGroup">
+      <ion-input placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!createGroup">
+      <ion-input placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!createGroup">
+      <ion-label>$</ion-label>
+      <ion-input type="number" placeholder="Category Target Amount" [(ngModel)]="categoryTargetAmount"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>

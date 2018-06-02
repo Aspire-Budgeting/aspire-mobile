@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar color=dark>
+    <ion-title>
+      Move Money
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="save()">
+        <ion-icon name="md-checkmark-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar color=dark>
+    <ion-segment [(ngModel)]="newTransactionData.direction">
+      <ion-segment-button (click)="moveMoneyIn()" [ngClass]="newTransactionData.direction == 'into' ? 'activeArrow' : 'inactiveArrow'"
+        value="into">
+        <ion-icon name="md-arrow-round-down"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="moveMoneyOut()" [ngClass]="newTransactionData.direction == 'from' ? 'activeArrow' : 'inactiveArrow'"
+        value="from">
+        <ion-icon name="md-arrow-round-up"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <!--<form [formGroup]="moveMoneyForm" (ngSubmit)="save()">-->
+    <ion-card>
+      <ion-item>
+        <ion-label color=dark style="font-size: 35px">$</ion-label>
+        <ion-input style="font-size: 35px" type="number" [(ngModel)]="newTransactionData.amount" placeholder="0.00" clearInput (input)="calculateSums()"></ion-input>
+      </ion-item>
+    </ion-card>
+    <div style="color: #535354; font-size: 18px; padding: 5px 0 5px 0; border-top: 1px solid #B5B6BB; border-bottom: 1px solid #B5B6BB; background-color: #EFEFED; text-align: center">{{currentAtob.name}}</div>
+    <div style="text-align: center; background-color: white; padding-top: 25px; padding-bottom: 35px;">
+      <span class="normal-category">{{currentAtob.amount/100 | currency}}</span>
+      <span style="color: #535354; font-size: 16px" *ngIf="newTransactionData.amount">{{atobCalc}}</span>
+      <span *ngIf="newTransactionData.amount" [ngClass]="newTransactionData.direction == 'from' ? 'pos-category' : 'neg-category'">{{newTransactionData.amount | currency}}</span>
+      <div style="height: 22px" *ngIf="newTransactionData.amount > 9999"></div>
+      <span style="color: #535354; font-size: 16px" *ngIf="newTransactionData.amount">=</span>
+      <span *ngIf="newTransactionData.amount" [ngClass]="atobAmount > 0  ? 'pos-category' : (atobAmount < 0 ? 'neg-category' : 'zero-category')">{{atobAmount/100 | currency}}</span>
+    </div>
+
+    <div style="color: #535354; font-size: 18px; padding: 5px 0 5px 0; border-top: 1px solid #B5B6BB; border-bottom: 1px solid #B5B6BB; background-color: #EFEFED; text-align: center">{{currentCatName}}</div>
+    <div style="text-align: center; background-color: white; padding-top: 25px; padding-bottom: 35px;">
+      <span class="normal-category">{{currentTargetCatAmount/100 | currency}}</span>
+      <span style="color: #535354; font-size: 16px" *ngIf="newTransactionData.amount">{{targetCatCalc}}</span>
+      <span *ngIf="newTransactionData.amount" [ngClass]="newTransactionData.direction == 'from' ? 'neg-category' : 'pos-category'">{{newTransactionData.amount | currency}}</span>
+      <div style="height: 22px" *ngIf="newTransactionData.amount > 9999"></div>
+      <span style="color: #535354; font-size: 16px" *ngIf="newTransactionData.amount">=</span>
+      <span *ngIf="newTransactionData.amount" [ngClass]="targetCatAmount > 0  ? 'pos-category' : (targetCatAmount < 0 ? 'neg-category' : 'zero-category')">{{targetCatAmount/100 | currency}}</span>
+    </div>
+
+</ion-content>

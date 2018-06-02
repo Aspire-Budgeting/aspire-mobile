@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar color=dark>
+    <ion-title>
+      Categories
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createNewGroup()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <!--<div text-center>
+    <button small (click)="createNewGroup()" style="display: inline-block; width: 45%; border-radius: 50px; margin: 10px;" color=phantomgray
+      ion-button block icon-start>
+      <ion-icon name="md-add-circle"></ion-icon>
+      Add Group
+    </button>
+  </div>-->
+  <ion-list *ngFor='let group of categoriesContainer'>
+
+    <ion-item-sliding #slidingItem>
+      <ion-item class="header" color="headercolor">{{group.name}}
+        <ion-note color=darkgray class="header-right-text" item-end>MONTHLY TARGET</ion-note>
+      </ion-item>
+
+      <ion-item-options side="right">
+        <!--<button ion-button color="dark" (click)="noop()">
+          <ion-icon name="md-create"></ion-icon>
+          EDIT
+        </button>-->
+        <button ion-button color="cardinalred" (click)="deleteGroup(group._id)">
+          <ion-icon name="trash"></ion-icon>
+          DELETE ALL
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding *ngFor="let category of group['categories']" #slidingItem>
+      <ion-item>
+        <ion-label color=dark>{{category.name}}</ion-label>
+        <ion-note item-end class="normal-category">
+          {{ category.targetAmount/100 | currency}}
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <!--<button ion-button color="dark" (click)="noop()">
+          <ion-icon name="md-create"></ion-icon>
+          EDIT
+        </button>-->
+        <button ion-button color="cardinalred" (click)="deleteCategory(category._id, category.name, category.amount)">
+          <ion-icon name="trash"></ion-icon>
+          DELETE
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <div text-center>
+      <button small (click)="createNewCategory(group._id)" style="display: inline-block; width: 98%; margin-top: 0px; margin-bottom: 15px; border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;"
+        color=phantomgray ion-button block icon-start>
+        <ion-icon name="md-add"></ion-icon>
+        Add Category
+      </button>
+    </div>
+
+  </ion-list>
+</ion-content>

@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <div [ngClass]="availableToBudget.amount > 0  ? 'pos-atob-amount' : (availableToBudget.amount < 0 ? 'neg-atob-amount' : 'zero-atob-amount')">{{availableToBudget.amount/100 | currency}}</div>
+    <div class="atob-text">Available to budget</div>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="toggleHUD()">
+        <ion-icon *ngIf="showHUD" name="ios-arrow-down"></ion-icon>
+        <ion-icon *ngIf="!showHUD" name="ios-arrow-up"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-toolbar *ngIf="showHUD" color="graphite" no-border-top>
+    <ion-toolbar style="border: none !important;" no-border-top color="graphite">
+      <ion-segment [(ngModel)]="columnSetting" color=mediumgray>
+        <ion-segment-button value="AVAILABLE">
+          AVAILABLE
+        </ion-segment-button>
+        <ion-segment-button value="SPENT">
+          SPENT
+        </ion-segment-button>
+        <ion-segment-button value="TARGET">
+          TARGET
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+    <ion-grid style="padding: 0px">
+      <ion-row style="padding: 0px">
+        <ion-col style="padding: 0px">
+          <ion-card style="padding-top: 3px; text-align: center; height: 40px; background-color: #424459; border-radius: 15px;">
+            <ion-icon style="font-size: 28px" color=buttonblue name="md-calendar"></ion-icon>
+            <span style="font-size: 26px; color: #78B3D3">{{daysLeftInMonth}}</span>
+          </ion-card>
+        </ion-col>
+        <ion-col style="padding: 0px">
+          <ion-card style="padding-top: 3px; text-align: center; height: 40px; background-color: #424459; border-radius: 15px;">
+            <ion-icon style="font-size: 28px" color=fogyellow name="md-checkbox"></ion-icon>
+            <span style="font-size: 26px; color: #FFF6B7">{{pendingTransactions}}</span>
+          </ion-card>
+        </ion-col>
+        <!--<ion-col style="padding: 0px">
+          <ion-card style="padding-top: 3px; text-align: center; height: 40px; background-color: #424459; border-radius: 15px;">
+            <ion-icon style="font-size: 28px" color=cardinalred name="md-notifications"></ion-icon>
+            <span style="font-size: 26px; color: #DA5558">3</span>
+          </ion-card>
+        </ion-col>-->
+      </ion-row>
+    </ion-grid>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="app-background" #content>
+  <ion-card *ngIf="categoriesContainer.length == 0">
+    <ion-card-content>
+      You don't have any Categories.
+    </ion-card-content>
+  </ion-card>
+  <ion-list *ngFor="let group of categoriesContainer">
+    <ion-item-divider sticky class="header" color="headercolor">{{group.name}}
+      <ion-note color=darkgray class="header-right-text" item-end>{{columnSetting}}</ion-note>
+    </ion-item-divider>
+    <ion-item-sliding *ngFor="let category of group['categories']" #slidingItem>
+
+      <!-- Available -->
+      <ion-item *ngIf="columnSetting == 'AVAILABLE'">
+        <ion-label color=dark>{{category.name}}</ion-label>
+        <ion-note item-end [ngClass]="category.amount > 0  ? 'pos-category' : (category.amount < 0 ? 'neg-category' : 'zero-category')">
+          {{category.amount/100 | currency}}
+        </ion-note>
+      </ion-item>
+
+      <!-- Spent -->
+      <ion-item *ngIf="columnSetting == 'SPENT'">
+        <ion-label color=dark>{{category.name}}</ion-label>
+        <ion-note item-end class="normal-category">
+          {{ category.spentAmount/100 | currency}}
+        </ion-note>
+      </ion-item>
+
+      <!-- Budgeted -->
+      <ion-item *ngIf="columnSetting == 'TARGET'">
+        <ion-label color=dark>{{category.name}}</ion-label>
+        <ion-note item-end class="normal-category">
+          {{ category.targetAmount/100 | currency}}
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options (ionSwipe)="slideItem(slidingItem, 'into', category)" side="left">
+        <button class="swipe-buttons" ion-button expandable (click)="slideItem(slidingItem, 'into', category)">
+          <ion-icon name="md-arrow-round-down"></ion-icon>
+          MOVE INTO
+        </button>
+      </ion-item-options>
+
+      <ion-item-options (ionSwipe)="slideItem(slidingItem, 'from', category)" side="right">
+        <button class="swipe-buttons" ion-button expandable (click)="slideItem(slidingItem, 'into', category)">
+          <ion-icon name="md-arrow-round-up"></ion-icon>
+          MOVE FROM
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

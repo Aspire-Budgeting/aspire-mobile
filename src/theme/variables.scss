@@ -1,0 +1,119 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary:        #353748,
+  graphite:       #353748,
+  dark:           #353748,
+  wintergreen:    #51AD7C,
+  mintgreen:      #7CC19C,
+  buttonblue:     #78B3D3,
+  cardinalred:    #DA5558,
+  fogyellow:      #FFF6B7,
+  light:          #fcfcfc,
+  white:          #FFFFFF,
+
+  headercolor:    #E3ECF4,
+  backgroundgray: #F5F3F5,
+  tabgray:        #EFEFED,
+  mediumgray:     #B5B6BB,
+  darkgray:       #535354,
+
+  // card colors
+  peach:          #FF9681,
+  slategray:      #799496,
+  eggplantpurple: #775499,
+  seaweedgreen:   #58B0AE,
+  lakeblue:       #3F88C5,
+  phantomgray:    #587291,
+
+  // settings
+  reddit:  #ff4500,
+  twitter: #00aced,
+  web:     #1B85D5,
+);
+
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+$tabs-ios-tab-icon-color: map-get($colors, mediumgray) !important;
+$tabs-ios-tab-icon-color-active: map-get($colors, darkgray) !important;
+$tabs-ios-border-color: map-get($colors, mediumgray) !important;
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+/*@import "roboto";
+@import "noto-sans";
+
+@font-face {
+  font-family: 'Merriweather Sans';
+  src: url('../assets/fonts/Merriweather_Sans/MerriweatherSans-Regular.ttf');
+}
+
+$font-family-ios-base: 'Merriweather Sans';*/
