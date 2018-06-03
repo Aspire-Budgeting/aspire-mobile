@@ -23,6 +23,7 @@ export class MoveMoneyModalComponent {
   currentAtob: any = [];
   currentTargetCatAmount: number = null;
   currentCatName: string = null;
+  currentCatId: string = null;
 
   newTransactionData = { // every transaction should have the following attributes
     name: "",
@@ -51,19 +52,20 @@ export class MoveMoneyModalComponent {
     this.currentAtob = navParams.get('availableToBudget');
     this.currentTargetCatAmount = navParams.get('category').amount;
     this.currentCatName = navParams.get('category').name;
+    this.currentCatId = navParams.get('category')._id;
 
     if (this.newTransactionData.direction === "into") {
       this.targetCatCalc = "+";
       this.atobCalc = "-";
-      this.newTransactionData.destCatId = navParams.get('category')._id;
-      this.destCatNAme = navParams.get('category').name;
+      this.newTransactionData.destCatId = this.currentCatId
+      this.destCatNAme = this.currentCatName;
       this.newTransactionData.sourceCatId = this.currentAtob._id;
       this.sourceCatName = this.currentAtob.name;
     } else if (this.newTransactionData.direction === "from") { // from
       this.targetCatCalc = "-";
       this.atobCalc = "+";
-      this.newTransactionData.sourceCatId = navParams.get('category')._id;
-      this.sourceCatName = navParams.get('category').name;
+      this.newTransactionData.sourceCatId = this.currentCatId;
+      this.sourceCatName = this.currentCatName;
       this.newTransactionData.destCatId = this.currentAtob._id;
       this.destCatNAme = this.currentAtob.name;
     }
@@ -76,12 +78,20 @@ export class MoveMoneyModalComponent {
     this.targetCatCalc = "-";
     this.atobCalc = "+";
     this.calculateSums();
+    this.newTransactionData.sourceCatId = this.currentCatId;
+    this.sourceCatName = this.currentCatName;
+    this.newTransactionData.destCatId = this.currentAtob._id;
+    this.destCatNAme = this.currentAtob.name;
   }
 
   moveMoneyIn() {
     this.targetCatCalc = "+";
     this.atobCalc = "-";
     this.calculateSums();
+    this.newTransactionData.destCatId = this.currentCatId
+    this.destCatNAme = this.currentCatName;
+    this.newTransactionData.sourceCatId = this.currentAtob._id;
+    this.sourceCatName = this.currentAtob.name;
   }
 
   calculateSums() {

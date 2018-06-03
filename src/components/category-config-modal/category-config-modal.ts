@@ -13,6 +13,7 @@ export class CategoryConfigModalComponent {
   categoryName: string = "";
   categoryTargetAmount: string = "";
   groupName: string = "";
+  title = "New Category";
 
   constructor(
     public viewCtrl: ViewController,
@@ -23,6 +24,9 @@ export class CategoryConfigModalComponent {
 
     this.parentId = navParams.get('parentId');
     this.createGroup = navParams.get('createGroup');
+    if(this.createGroup){
+      this.title = "New Group";
+    }
   }
 
   save() {
