@@ -32,6 +32,7 @@
         <ion-label [class.invalid]="!form.controls.accountType.valid && this.submitted" color="darkgray">Account Type</ion-label>
         <ion-select formControlName="accountType" placeholder="Select" [(ngModel)]="accountData.type">
           <ion-option value="b">Bank Account</ion-option>
+          <ion-option value="m">Cash</ion-option>
           <ion-option value="c">Credit Card</ion-option>
         </ion-select>
       </ion-item>

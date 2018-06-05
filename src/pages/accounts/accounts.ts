@@ -42,6 +42,12 @@ export class AccountsPage {
     modal.present();
   }
 
+  getIcon(account) {
+    if (account.type == "m") return "md-cash";
+    else if (account.type == "c") return "md-card";
+    else if (account.type == "b") return "md-home";
+  }
+
   present(account) {
     let actionSheet = this.alertCtrl.create({
       buttons: [

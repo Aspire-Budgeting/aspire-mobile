@@ -19,13 +19,14 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor='let account of accounts' [ngClass]="account.cardClass">
+  <ion-card *ngFor='let account of accounts' class="account-card" style="background-color: #E8E8E5">
     <ion-card-header class="account-header">
       <ion-icon (click)="present(account)" class="account-icon" name="ios-settings"></ion-icon>
-      <span class="bubble-text">{{account.name}}</span>
+      <ion-icon class="type-icon" name={{getIcon(account)}}></ion-icon>
+      <span class="text" style="color: #535354;">{{account.name}}</span>
     </ion-card-header>
     <ion-card-content class="account-amount">
-      <span [ngClass]="account.amount > 0  ? 'pos-account' : (account.amount < 0 ? 'neg-account' : 'zero-account')" class="bubble-text">{{account.amount/100 | currency}}</span>
+      <span [ngClass]="account.amount > 0  ? 'pos-account' : (account.amount < 0 ? 'neg-account' : 'zero-account')">{{account.amount/100 | currency}}</span>
     </ion-card-content>
   </ion-card>
 </ion-content>

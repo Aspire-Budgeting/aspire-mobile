@@ -67,7 +67,7 @@ export class AccountModalComponent {
 
             this.newTransactionData.name += this.accountData.name;
 
-            if (this.accountData.type === "b") {
+            if (this.accountData.type === "b" || this.accountData.type === "m") {
               this.newTransactionData.direction = "Inflow";
               this.newTransactionData.destCatId = atob._id;
               this.newTransactionData.destAcctId = account.id;
