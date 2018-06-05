@@ -19,14 +19,16 @@
 <ion-content class="app-background">
   <ion-list>
     <ion-item *ngIf="createGroup">
-      <ion-input placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
+      <ion-label color="darkgray">Name</ion-label>
+      <ion-input text-right placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
     </ion-item>
     <ion-item *ngIf="!createGroup">
-      <ion-input placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
+      <ion-label color="darkgray">Name</ion-label>
+      <ion-input text-right placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
     </ion-item>
     <ion-item *ngIf="!createGroup">
-      <ion-label>$</ion-label>
-      <ion-input type="number" placeholder="Category Target Amount" [(ngModel)]="categoryTargetAmount"></ion-input>
+      <ion-label color="darkgray">Amount</ion-label>
+      <ion-input text-right type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
     </ion-item>
   </ion-list>
 </ion-content>
