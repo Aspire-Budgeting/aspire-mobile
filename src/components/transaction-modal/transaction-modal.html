@@ -31,60 +31,68 @@
 
 <ion-content class="app-background">
   <ion-list>
-    <ion-item>
-      <ion-label color="darkgray">Name</ion-label>
-      <ion-input text-right placeholder="Transaction Name" [(ngModel)]="newTransactionData.name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="darkgray">Amount</ion-label>
-      <ion-input text-right type="number" placeholder="0.00" [(ngModel)]="newTransactionData.amount"></ion-input>
-    </ion-item>
+    <form [formGroup]="commonForm">
+      <ion-item>
+        <ion-label [class.invalid]="!commonForm.controls.name.valid && this.submitted" color="darkgray">Name</ion-label>
+        <ion-input formControlName="name" text-right placeholder="Transaction Name" [(ngModel)]="newTransactionData.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label [class.invalid]="!commonForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" text-right type="number" placeholder="0.00" [(ngModel)]="newTransactionData.amount"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label [class.invalid]="!commonForm.controls.date.valid && this.submitted" color="darkgray">Date</ion-label>
+        <ion-datetime formControlName="date" displayFormat="MMM DD, YYYY" min="2018-01-01" max="2050-01-01" [(ngModel)]="newTransactionData.date"></ion-datetime>
+      </ion-item>
+    </form>
 
     <!-- OUTFLOW -->
-    <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
-      <ion-label color="darkgray">Category</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.sourceCatId">
-        <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
-      <ion-label color="darkgray">Account</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
-        <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <form [formGroup]="outflowForm">
+      <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
+        <ion-label [class.invalid]="!outflowForm.controls.category.valid && this.submitted" color="darkgray">Category</ion-label>
+        <ion-select formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.sourceCatId">
+          <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
+        <ion-label [class.invalid]="!outflowForm.controls.account.valid && this.submitted" color="darkgray">Account</ion-label>
+        <ion-select formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
+          <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </form>
 
     <!-- INFLOW -->
-    <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
-      <ion-label color="darkgray">Category</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.destCatId">
-        <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
-      <ion-label color="darkgray">Account</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
-        <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <form [formGroup]="inflowForm">
+      <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
+        <ion-label [class.invalid]="!inflowForm.controls.category.valid && this.submitted" color="darkgray">Category</ion-label>
+        <ion-select formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.destCatId">
+          <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
+        <ion-label [class.invalid]="!inflowForm.controls.account.valid && this.submitted" color="darkgray">Account</ion-label>
+        <ion-select formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
+          <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </form>
 
     <!-- TRANSFER -->
-    <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
-      <ion-label color="darkgray">Source</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
-        <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
-      <ion-label color="darkgray">Destination</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
-        <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
-      </ion-select>
-    </ion-item>
+    <form [formGroup]="transferForm">
+      <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
+        <ion-label [class.invalid]="!transferForm.controls.source.valid && this.submitted" color="darkgray">Source</ion-label>
+        <ion-select formControlName="source" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
+          <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
+        <ion-label [class.invalid]="!transferForm.controls.dest.valid && this.submitted" color="darkgray">Destination</ion-label>
+        <ion-select formControlName="dest" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
+          <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </form>
 
-    <ion-item>
-      <ion-label color="darkgray">Date</ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYY" min="2018-01-01" max="2050-01-01" [(ngModel)]="newTransactionData.date"></ion-datetime>
-    </ion-item>
   </ion-list>
 </ion-content>

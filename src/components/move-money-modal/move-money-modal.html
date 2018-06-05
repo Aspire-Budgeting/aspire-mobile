@@ -29,14 +29,16 @@
 </ion-header>
 
 <ion-content class="app-background">
-  <!--<form [formGroup]="moveMoneyForm" (ngSubmit)="save()">-->
-  <ion-list>
-    <ion-item>
-      <ion-label color="darkgray">Amount</ion-label>
-      <ion-input (input)="calculateSums()" text-right type=" number " placeholder="0.00 " [(ngModel)]="newTransactionData.amount "></ion-input>
-    </ion-item>
-  </ion-list>
-  <div style="padding-top: 20px"></div>
+  
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label [class.invalid]="!form.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" (input)="calculateSums()" text-right type=" number " placeholder="0.00 " [(ngModel)]="newTransactionData.amount "></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+
   <div style="color: #535354; font-size: 18px; padding: 5px 0 5px 0; border-top: 1px solid #B5B6BB; border-bottom: 1px
       solid #B5B6BB; background-color: #EFEFED; text-align: center ">{{currentAtob.name}}</div>
   <div style="text-align: center; background-color: white; padding-top: 25px; padding-bottom: 35px; ">

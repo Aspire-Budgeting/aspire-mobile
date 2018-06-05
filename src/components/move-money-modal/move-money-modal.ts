@@ -13,7 +13,8 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class MoveMoneyModalComponent {
 
-  private moveMoneyForm: FormGroup;
+  form = null;
+  submitted = false;
 
   atobCalc: string = "-";
   targetCatCalc: string = "+";
@@ -44,9 +45,9 @@ export class MoveMoneyModalComponent {
   constructor(public viewCtrl: ViewController, public navParams: NavParams, public categoriesProvider: CategoriesProvider,
     public moneyProvider: MoneyProvider, public events: Events, public transactionProvider: TransactionsProvider, private formBuilder: FormBuilder) {
 
-    /*this.moveMoneyForm = this.formBuilder.group({
-      amount: [Validators.required]//, forbiddenNameValidator(/bob/i) ^-?\d+(\.\d{2})?$],
-    });*/
+    this.form = formBuilder.group({
+      amount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+    });
 
     this.newTransactionData.direction = navParams.get('moneyDirection');
     this.currentAtob = navParams.get('availableToBudget');
@@ -104,6 +105,12 @@ export class MoveMoneyModalComponent {
   }
 
   save() {
+
+    this.submitted = true;
+
+    if(!this.form.valid){
+      return;
+    }
 
     let promiseStructure = this.transactionProvider.addTransaction(this.newTransactionData).then(
       (result) => {

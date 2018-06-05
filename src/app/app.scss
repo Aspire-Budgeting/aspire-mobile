@@ -72,3 +72,7 @@
   font-weight: 300;
 }
 
+.invalid {
+  color: map-get($colors, cardinalred) !important;
+  font-weight: bold;
+}

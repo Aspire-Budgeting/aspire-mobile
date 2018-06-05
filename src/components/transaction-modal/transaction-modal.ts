@@ -5,6 +5,7 @@ import { CategoriesProvider } from '../../providers/categories/categories';
 import { AccountsProvider } from '../../providers/accounts/accounts';
 import { MoneyProvider } from '../../providers/money/money';
 import { Events } from 'ionic-angular';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'transaction-modal',
@@ -36,11 +37,37 @@ export class TransactionModalComponent {
   categories = [];
   accounts = [];
 
+  submitted = false;
+  commonForm = null;
+  inflowForm = null;
+  outflowForm = null;
+  transferForm = null;
+
 
   constructor(public viewCtrl: ViewController, public transactionsProvider: TransactionsProvider,
     public categoriesProvider: CategoriesProvider, public accountsProvider: AccountsProvider, public navParams: NavParams,
-    public events: Events, public moneyProvider: MoneyProvider) {
+    public events: Events, public moneyProvider: MoneyProvider, public formBuilder: FormBuilder) {
 
+    this.commonForm = formBuilder.group({
+      name: ['', Validators.compose([Validators.required])],
+      amount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+      date: ['', Validators.compose([Validators.required])]
+    });
+
+    this.inflowForm = formBuilder.group({
+      category: ['', Validators.compose([Validators.required])],
+      account: ['', Validators.compose([Validators.required])]
+    });
+
+    this.outflowForm = formBuilder.group({
+      category: ['', Validators.compose([Validators.required])],
+      account: ['', Validators.compose([Validators.required])]
+    });
+
+    this.transferForm = formBuilder.group({
+      source: ['', Validators.compose([Validators.required])],
+      dest: ['', Validators.compose([Validators.required])]
+    });
 
     let editTransaction = navParams.get('transaction');
 
@@ -69,20 +96,26 @@ export class TransactionModalComponent {
 
   save() {
 
-    if (this.newTransactionData.direction === "Transfer") {
+    this.submitted = true;
+
+    if (this.newTransactionData.direction === "Transfer" && this.transferForm.valid && this.commonForm.valid) {
       this.newTransactionData.status = "Cleared";
       this.newTransactionData.destCatId = null;
       this.newTransactionData.sourceCatId = null;
     }
 
-    if (this.newTransactionData.direction === "Inflow") {
+    else if (this.newTransactionData.direction === "Inflow" && this.inflowForm.valid && this.commonForm.valid) {
       this.newTransactionData.sourceAcctId = null;
       this.newTransactionData.sourceCatId = null;
     }
 
-    if (this.newTransactionData.direction === "Outflow") {
+    else if (this.newTransactionData.direction === "Outflow" && this.outflowForm.valid && this.commonForm.valid) {
       this.newTransactionData.destAcctId = null;
       this.newTransactionData.destCatId = null;
+    }
+
+    else{
+      return;
     }
 
     let transactionPromise = null;
@@ -98,7 +131,7 @@ export class TransactionModalComponent {
       () => {
 
         let promiseStructure = [];
-        
+
         promiseStructure.push(this.accountsProvider.refreshAllAccounts());
         promiseStructure.push(this.categoriesProvider.refreshAllCategories());
 

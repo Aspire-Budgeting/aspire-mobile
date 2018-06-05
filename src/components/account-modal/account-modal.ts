@@ -5,6 +5,7 @@ import { TransactionsProvider } from '../../providers/transactions/transactions'
 import { MoneyProvider } from '../../providers/money/money';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { Events } from 'ionic-angular';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'account-modal',
@@ -32,10 +33,19 @@ export class AccountModalComponent {
     cardClass: this.accountProvider.getCardClass(),
   }
 
+  form = null;
+  submitted = false;
+
   constructor(public viewCtrl: ViewController, public accountProvider: AccountsProvider,
     public transactionProvider: TransactionsProvider, public moneyProvider: MoneyProvider,
-    public categoryProvider: CategoriesProvider, public events: Events) {
+    public categoryProvider: CategoriesProvider, public events: Events, public formBuilder: FormBuilder) {
     this.newTransactionData.date = (new Date()).toISOString();
+
+    this.form = formBuilder.group({
+      accountName: ['', Validators.compose([Validators.required])],
+      currentAmount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+      accountType: ['', Validators.compose([Validators.required])],
+    });
   }
 
   dismiss(): void {
@@ -43,6 +53,12 @@ export class AccountModalComponent {
   }
 
   save(): any {
+
+    this.submitted = true;
+
+    if(!this.form.valid){
+      return;
+    }
 
     let promiseStructure = this.accountProvider.addAccount(this.accountData).then(
       (account) => {

@@ -18,17 +18,21 @@
 
 <ion-content class="app-background">
   <ion-list>
-    <ion-item *ngIf="createGroup">
-      <ion-label color="darkgray">Name</ion-label>
-      <ion-input text-right placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!createGroup">
-      <ion-label color="darkgray">Name</ion-label>
-      <ion-input text-right placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
-    </ion-item>
-    <ion-item *ngIf="!createGroup">
-      <ion-label color="darkgray">Amount</ion-label>
-      <ion-input text-right type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
-    </ion-item>
+    <form [formGroup]="groupForm">
+      <ion-item *ngIf="createGroup">
+        <ion-label [class.invalid]="!groupForm.controls.groupName.valid && this.submitted" color="darkgray">Name</ion-label>
+        <ion-input formControlName="groupName" text-right placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
+      </ion-item>
+    </form>
+    <form [formGroup]="categoryForm">
+      <ion-item *ngIf="!createGroup">
+        <ion-label [class.invalid]="!categoryForm.controls.categoryName.valid && this.submitted" color="darkgray">Name</ion-label>
+        <ion-input formControlName="categoryName" text-right placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!createGroup">
+        <ion-label [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" text-right type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
+      </ion-item>
+    </form>
   </ion-list>
 </ion-content>

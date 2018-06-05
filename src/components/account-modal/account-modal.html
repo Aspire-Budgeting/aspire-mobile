@@ -17,21 +17,25 @@
 </ion-header>
 
 <ion-content class="app-background">
-  <ion-list>
-    <ion-item>
-      <ion-label color="darkgray">Name</ion-label>
-      <ion-input text-right placeholder="Account Name" [(ngModel)]="accountData.name"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="darkgray">Current Amount</ion-label>
-      <ion-input text-right [(ngModel)]="newTransactionData.amount" type="number" placeholder="0.00"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label color="darkgray">Account Type</ion-label>
-      <ion-select placeholder="Select" [(ngModel)]="accountData.type">
-        <ion-option value="b">Bank Account</ion-option>
-        <ion-option value="c">Credit Card</ion-option>
-      </ion-select>
-    </ion-item>
-  </ion-list>
+
+  <form [formGroup]="form">
+    <ion-list>
+      <ion-item>
+        <ion-label [class.invalid]="!form.controls.accountName.valid && this.submitted" color="darkgray">Name</ion-label>
+        <ion-input formControlName="accountName" text-right placeholder="Account Name" [(ngModel)]="accountData.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label [class.invalid]="!form.controls.currentAmount.valid && this.submitted" color="darkgray">Current Amount</ion-label>
+        <ion-input formControlName="currentAmount" text-right [(ngModel)]="newTransactionData.amount" type="number" placeholder="0.00"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label [class.invalid]="!form.controls.accountType.valid && this.submitted" color="darkgray">Account Type</ion-label>
+        <ion-select formControlName="accountType" placeholder="Select" [(ngModel)]="accountData.type">
+          <ion-option value="b">Bank Account</ion-option>
+          <ion-option value="c">Credit Card</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </form>
+
 </ion-content>
