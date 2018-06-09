@@ -1,6 +1,6 @@
 tab-bar{
     .ion-md-add-circle:before{
         color: map-get($colors, buttonblue);
-        background: radial-gradient( white 7px, #EFEFED 8px);
+        background: radial-gradient( white 7px, map-get($colors, tabgray) 8px);
     }
 }

@@ -24,19 +24,21 @@
   padding-right: 8px;
   border-radius: 10px;
   font-weight: bold;
-  border-width: 1px;
+  border-width: 1px !important;
   font-size: 16px;
-  border: solid #F1F2EF;
+  border: solid lighten(map-get($colors, mediumgray), 10%);
 }
 
 .pos-category {
   @include categoryAmount();
   color: map-get($colors, wintergreen);
+  border: solid lighten(#51AD7C, 20%);
 }
 
 .neg-category {
   @include categoryAmount();
   color: map-get($colors, cardinalred);
+  border: solid lighten(#DA5558, 20%);
 }
 
 .zero-category {
@@ -59,7 +61,6 @@
 }
 
 .header{
-  font-weight: bold;
   color: map-get($colors, dark);
 }
 
@@ -70,9 +71,19 @@
 .header-right-text{
   font-size: 14px;
   font-weight: 300;
+  color: map-get($colors, dark);
 }
 
 .invalid {
   color: map-get($colors, cardinalred) !important;
   font-weight: bold;
+}
+
+.aspire-card{
+  border-radius: 5px !important;
+  border-style: solid;
+  border: solid lighten(map-get($colors, mediumgray), 10%);
+  border-width: 1px;
+  box-shadow: none !important;
+
 }

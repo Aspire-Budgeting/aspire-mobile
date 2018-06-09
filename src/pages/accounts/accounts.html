@@ -19,7 +19,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor='let account of accounts' class="account-card" style="background-color: #E8E8E5">
+  <ion-card *ngFor='let account of accounts' class="aspire-card">
     <ion-card-header class="account-header">
       <ion-icon (click)="present(account)" class="account-icon" name="ios-settings"></ion-icon>
       <ion-icon class="type-icon" name={{getIcon(account)}}></ion-icon>

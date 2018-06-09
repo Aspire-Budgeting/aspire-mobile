@@ -38,10 +38,7 @@ page-accounts {
         display: inline-block;
         vertical-align: middle;
     }
-
-    .account-card{
-        border-radius: 10px;
-    }
+    
     .card-color1{background: map-get($colors, seaweedgreen)}
     .card-color2{background: map-get($colors, lakeblue)}
     .card-color3{background: map-get($colors, peach)}
