@@ -16,7 +16,7 @@
 
 <ion-content *ngIf="isFiltering == true" class="app-background" #content>
   <ion-item-divider class="header" color="headercolor">Filtered Transactions</ion-item-divider>
-  <ion-card *ngIf="filterItems.length == 0">
+  <ion-card class="aspire-card" *ngIf="filterItems.length == 0">
     <ion-card-content>
       No transactions found.
     </ion-card-content>
@@ -39,7 +39,7 @@
 
 <ion-content *ngIf="isFiltering == false" class="app-background" #content>
   <ion-item-divider class="header" color="headercolor">Pending Transactions</ion-item-divider>
-  <ion-card *ngIf="pendingTransactions.length == 0">
+  <ion-card class="aspire-card" *ngIf="pendingTransactions.length == 0">
     <ion-card-content>
       You don't have any Pending Transactions.
     </ion-card-content>
