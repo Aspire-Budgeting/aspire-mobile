@@ -24,21 +24,21 @@
   padding-right: 8px;
   border-radius: 10px;
   font-weight: bold;
-  border-width: 1px !important;
+  border-width: 2px !important;
   font-size: 16px;
-  border: solid lighten(map-get($colors, mediumgray), 10%);
+  border: solid lighten(map-get($colors, mediumgray), 20%);
 }
 
 .pos-category {
   @include categoryAmount();
   color: map-get($colors, wintergreen);
-  border: solid lighten(#51AD7C, 20%);
+  border: solid lighten(#51AD7C, 35%);
 }
 
 .neg-category {
   @include categoryAmount();
   color: map-get($colors, cardinalred);
-  border: solid lighten(#DA5558, 20%);
+  border: solid lighten(#DA5558, 30%);
 }
 
 .zero-category {
