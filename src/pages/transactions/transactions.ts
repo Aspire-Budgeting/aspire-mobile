@@ -52,8 +52,8 @@ export class TransactionsPage {
               this.pendingTransactions[i].categoryName = this.getCategoryName(this.pendingTransactions[i].sourceCatId, this.pendingTransactions[i].destCatId);
             }
 
-          }
-        )
+          });
+
         this.transactionsProvider.getClearedTransactions().then(
           result => {
             result.sort(this.sorter.sortByDate);
@@ -72,7 +72,7 @@ export class TransactionsPage {
               }
               this.transactionIterator++
             }
-          })
+          });
       }
     )
   }
