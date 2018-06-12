@@ -21,12 +21,12 @@
   <form [formGroup]="form">
     <ion-list>
       <ion-item>
-        <ion-label [class.invalid]="!form.controls.accountName.valid && this.submitted" color="darkgray">Name</ion-label>
-        <ion-input formControlName="accountName" text-right placeholder="Account Name" [(ngModel)]="accountData.name"></ion-input>
+        <ion-label stacked [class.invalid]="!form.controls.accountName.valid && this.submitted" color="darkgray">Account Name</ion-label>
+        <ion-input formControlName="accountName" placeholder="Name" [(ngModel)]="accountData.name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label [class.invalid]="!form.controls.currentAmount.valid && this.submitted" color="darkgray">Current Amount</ion-label>
-        <ion-input formControlName="currentAmount" text-right [(ngModel)]="newTransactionData.amount" type="number" placeholder="0.00"></ion-input>
+        <ion-label stacked [class.invalid]="!form.controls.currentAmount.valid && this.submitted" color="darkgray">Current Amount</ion-label>
+        <ion-input formControlName="currentAmount" [(ngModel)]="newTransactionData.amount" type="number" placeholder="0.00"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label [class.invalid]="!form.controls.accountType.valid && this.submitted" color="darkgray">Account Type</ion-label>

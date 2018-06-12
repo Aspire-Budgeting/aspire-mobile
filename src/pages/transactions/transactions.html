@@ -49,6 +49,7 @@
       <ion-item text-wrap>
         <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
         <ion-label color=dark>{{transaction.name}}
+          <p text-wrap>{{transaction.accountName}}</p>
           <p>{{transaction.date | date:'mediumDate'}}</p>
         </ion-label>
         <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
@@ -88,13 +89,14 @@
     <ion-item text-wrap *ngFor='let transaction of clearedTransactions'>
       <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
+        <p text-wrap>{{transaction.accountName}}</p>
         <p>{{transaction.date | date:'mediumDate'}}</p>
       </ion-label>
       <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
         <span style="float: right;">
           {{transaction.amount/100 | currency}}</span>
-        <div *ngIf="transferDirection != 'Transfer'" style="padding-top: 28px;"></div>
-        <span *ngIf="transferDirection != 'Transfer'" style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+        <div style="padding-top: 28px;"></div>
+        <span style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
       </ion-note>
     </ion-item>
   </ion-list>

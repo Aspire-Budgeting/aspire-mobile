@@ -33,12 +33,12 @@
   <ion-list>
     <form [formGroup]="commonForm">
       <ion-item>
-        <ion-label [class.invalid]="!commonForm.controls.name.valid && this.submitted" color="darkgray">Name</ion-label>
-        <ion-input formControlName="name" text-right placeholder="Transaction Name" [(ngModel)]="newTransactionData.name"></ion-input>
+        <ion-label stacked [class.invalid]="!commonForm.controls.name.valid && this.submitted" color="darkgray">Transaction Name</ion-label>
+        <ion-input formControlName="name" placeholder="Name" [(ngModel)]="newTransactionData.name"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label [class.invalid]="!commonForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
-        <ion-input formControlName="amount" text-right type="number" placeholder="0.00" [(ngModel)]="newTransactionData.amount"></ion-input>
+        <ion-label stacked [class.invalid]="!commonForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" type="number" placeholder="0.00" [(ngModel)]="newTransactionData.amount"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label [class.invalid]="!commonForm.controls.date.valid && this.submitted" color="darkgray">Date</ion-label>

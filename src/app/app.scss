@@ -32,13 +32,13 @@
 .pos-category {
   @include categoryAmount();
   color: map-get($colors, wintergreen);
-  border: solid lighten(#51AD7C, 35%);
+  border: solid lighten(map-get($colors, wintergreen), 35%);
 }
 
 .neg-category {
   @include categoryAmount();
   color: map-get($colors, cardinalred);
-  border: solid lighten(#DA5558, 30%);
+  border: solid lighten(map-get($colors, cardinalred), 30%);
 }
 
 .zero-category {
@@ -54,6 +54,8 @@
 .transfer-category {
   @include categoryAmount();
   color: map-get($colors, buttonblue);
+  border: solid lighten(map-get($colors, buttonblue), 25%);
+
 }
 
 .swipe-buttons {

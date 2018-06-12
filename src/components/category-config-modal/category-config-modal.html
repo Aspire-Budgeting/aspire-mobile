@@ -20,18 +20,18 @@
   <ion-list>
     <form [formGroup]="groupForm">
       <ion-item *ngIf="createGroup">
-        <ion-label [class.invalid]="!groupForm.controls.groupName.valid && this.submitted" color="darkgray">Name</ion-label>
-        <ion-input formControlName="groupName" text-right placeholder="Group Name" [(ngModel)]="groupName"></ion-input>
+        <ion-label stacked [class.invalid]="!groupForm.controls.groupName.valid && this.submitted" color="darkgray">Group Name</ion-label>
+        <ion-input formControlName="groupName" placeholder="Name" [(ngModel)]="groupName"></ion-input>
       </ion-item>
     </form>
     <form [formGroup]="categoryForm">
       <ion-item *ngIf="!createGroup">
-        <ion-label [class.invalid]="!categoryForm.controls.categoryName.valid && this.submitted" color="darkgray">Name</ion-label>
-        <ion-input formControlName="categoryName" text-right placeholder="Category Name" [(ngModel)]="categoryName"></ion-input>
+        <ion-label stacked [class.invalid]="!categoryForm.controls.categoryName.valid && this.submitted" color="darkgray">Category Name</ion-label>
+        <ion-input formControlName="categoryName" placeholder="Name" [(ngModel)]="categoryName"></ion-input>
       </ion-item>
       <ion-item *ngIf="!createGroup">
-        <ion-label [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
-        <ion-input formControlName="amount" text-right type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
+        <ion-label stacked [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
       </ion-item>
     </form>
   </ion-list>

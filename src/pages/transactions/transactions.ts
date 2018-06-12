@@ -22,6 +22,7 @@ export class TransactionsPage {
   clearedTransactions = [];
   allClearedTransactions = [];
   categories = [];
+  accounts = [];
   filterItems = [];
   isFiltering = false;
   @ViewChild('content') content: Content;
@@ -40,41 +41,45 @@ export class TransactionsPage {
     this.transactionIterator = 0;
     this.clearedTransactions = [];
 
-    this.categoriesProvider.getAllCategories().then(
-      categories => {
-        this.categories = categories;
-        this.transactionsProvider.getPendingTransactions().then(
-          result => {
-            result.sort(this.sorter.sortByDate);
-            this.pendingTransactions = result;
+    this.accountsProvider.getAccounts().then(
+      accounts => {
+        this.accounts = accounts;
 
-            for (let i = 0; i < this.pendingTransactions.length; i++) {
-              this.pendingTransactions[i].categoryName = this.getCategoryName(this.pendingTransactions[i].sourceCatId, this.pendingTransactions[i].destCatId);
-            }
+        this.categoriesProvider.getAllCategories().then(
+          categories => {
+            this.categories = categories;
+            this.transactionsProvider.getPendingTransactions().then(
+              result => {
+                result.sort(this.sorter.sortByDate);
+                this.pendingTransactions = result;
 
+                for (let i = 0; i < this.pendingTransactions.length; i++) {
+                  this.pendingTransactions[i].categoryName = this.getCategoryName(this.pendingTransactions[i].sourceCatId, this.pendingTransactions[i].destCatId);
+                  this.pendingTransactions[i].accountName = this.getAccountName(this.pendingTransactions[i].sourceAcctId, this.pendingTransactions[i].destAcctId);
+                }
+              });
+
+            this.transactionsProvider.getClearedTransactions().then(
+              result => {
+                result.sort(this.sorter.sortByDate);
+                this.allClearedTransactions = result;
+                for (let i = 0; i < this.allClearedTransactions.length; i++) {
+                  this.allClearedTransactions[i].categoryName = this.getCategoryName(this.allClearedTransactions[i].sourceCatId, this.allClearedTransactions[i].destCatId);
+                  this.allClearedTransactions[i].accountName = this.getAccountName(this.allClearedTransactions[i].sourceAcctId, this.allClearedTransactions[i].destAcctId);
+                }
+
+                for (let i = 0; i < this.loadMoreCount; i++) {
+                  if (this.transactionIterator < this.allClearedTransactions.length) {
+                    this.clearedTransactions.push(this.allClearedTransactions[this.transactionIterator]);
+                  }
+                  else {
+                    this.noMoreTransactions = true;
+                  }
+                  this.transactionIterator++
+                }
+              });
           });
-
-        this.transactionsProvider.getClearedTransactions().then(
-          result => {
-            result.sort(this.sorter.sortByDate);
-            this.allClearedTransactions = result;
-
-            for (let i = 0; i < this.allClearedTransactions.length; i++) {
-              this.allClearedTransactions[i].categoryName = this.getCategoryName(this.allClearedTransactions[i].sourceCatId, this.allClearedTransactions[i].destCatId);
-            }
-
-            for (let i = 0; i < this.loadMoreCount; i++) {
-              if (this.transactionIterator < this.allClearedTransactions.length) {
-                this.clearedTransactions.push(this.allClearedTransactions[this.transactionIterator]);
-              }
-              else {
-                this.noMoreTransactions = true;
-              }
-              this.transactionIterator++
-            }
-          });
-      }
-    )
+      });
   }
 
   doInfinite(): Promise<any> {
@@ -92,6 +97,31 @@ export class TransactionsPage {
         resolve();
       }, 500);
     })
+  }
+
+  getAccountName(sourceId, destId) {
+    let accountName = "";
+    let endingString = ""
+    if (destId) {
+      for (let i = 0; i < this.accounts.length; i++) {
+        if (this.accounts[i]._id === destId) {
+          endingString = " to " + this.accounts[i].name;
+        }
+      }
+    }
+
+    for (let i = 0; i < this.accounts.length; i++) {
+      if (this.accounts[i]._id === sourceId) {
+        accountName = this.accounts[i].name + endingString
+      }
+    }
+
+    if (accountName === "") {
+      return "N/A";
+    }
+    else {
+      return accountName;
+    }
   }
 
   getCategoryName(sourceId, destId) {

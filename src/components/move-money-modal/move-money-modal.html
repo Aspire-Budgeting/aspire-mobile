@@ -33,8 +33,8 @@
   <form [formGroup]="form">
     <ion-list>
       <ion-item>
-        <ion-label [class.invalid]="!form.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
-        <ion-input formControlName="amount" (input)="calculateSums()" text-right type=" number " placeholder="0.00 " [(ngModel)]="newTransactionData.amount "></ion-input>
+        <ion-label stacked [class.invalid]="!form.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-input formControlName="amount" (input)="calculateSums()" type=" number " placeholder="0.00 " [(ngModel)]="newTransactionData.amount "></ion-input>
       </ion-item>
     </ion-list>
   </form>
