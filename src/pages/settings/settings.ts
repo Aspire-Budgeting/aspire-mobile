@@ -4,6 +4,8 @@ import { ModalController } from 'ionic-angular';
 import { CategoryConfigModalComponent } from '../../components/category-config-modal/category-config-modal';
 import { CategoriesProvider } from '../../providers/categories/categories';
 import { CategoriesPage } from '../categories/categories';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 @Component({
   selector: 'page-settings',
@@ -13,7 +15,7 @@ export class SettingsPage {
 
   categories = [];
 
-  constructor(public navController: NavController, public modalCtrl: ModalController, public categoriesProvider: CategoriesProvider) {
+  constructor(public iab: InAppBrowser, public navController: NavController, public modalCtrl: ModalController, public categoriesProvider: CategoriesProvider) {
   }
 
   openCategoryConfigModal() {
@@ -22,9 +24,32 @@ export class SettingsPage {
   }
 
   goToCategoriesPage(){
-    // push another page on to the navigation stack
-    // causing the nav controller to transition to the new page
-    // optional data can also be passed to the pushed page.
     this.navController.push(CategoriesPage);
   }
+
+  openThanksTo(){
+    let browser = this.iab.create('http://apache.org', '_blank', 'location=yes');
+    browser.show();
+  }
+
+  openPrivacyPolicy(){
+    let browser = this.iab.create('http://apache.org', '_blank', 'location=yes');
+    browser.show();
+  }
+  
+  openTwitter(){
+    let browser = this.iab.create('https://twitter.com/aspirebudget', '_blank', 'location=yes');
+    browser.show();
+  }
+
+  openReddit(){
+    let browser = this.iab.create('https://www.reddit.com/r/aspirebudgeting', '_blank', 'location=yes');
+    browser.show();
+  }
+
+  openWebsite(){
+    let browser = this.iab.create('http://aspirebudget.com/', '_blank', 'location=yes');
+    browser.show();
+  }
+
 }

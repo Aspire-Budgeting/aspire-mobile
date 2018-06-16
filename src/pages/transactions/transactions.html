@@ -25,18 +25,24 @@
     <ion-item text-wrap *ngFor='let transaction of filterItems'>
       <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
+        <div class="category-name ellipses-left">{{transaction.categoryName}}</div>
         <p>{{transaction.date | date:'mediumDate'}}</p>
       </ion-label>
-      <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
-        <span style="float: right;">
+
+      <ion-note item-end>
+        <span class="float-right" [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Inflow'" name="md-arrow-round-down" color="wintergreen"></ion-icon>
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Transfer'" name="md-swap" color="buttonblue"></ion-icon>
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Outflow'" name="md-arrow-round-up" color="cardinalred"></ion-icon>
           {{transaction.amount/100 | currency}}</span>
-        <div *ngIf="transferDirection != 'Transfer'" style="padding-top: 28px;"></div>
-        <span *ngIf="transferDirection != 'Transfer'" style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+        <div class="top-spacer"></div>
+        <span class="ellipses-right" [ngClass]="transaction.direction == 'Inflow'  ? 'inflow-account-name' : (transaction.direction == 'Outflow' ? 'outflow-account-name' : 'transfer-account-name')">{{transaction.accountName}}</span>
       </ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
 
+<!-- PENDING TRANSACTIONS -->
 <ion-content *ngIf="isFiltering == false" class="app-background" #content>
   <ion-item-divider class="header" color="headercolor">Pending Transactions</ion-item-divider>
   <ion-card class="aspire-card" *ngIf="pendingTransactions.length == 0">
@@ -49,15 +55,19 @@
       <ion-item text-wrap>
         <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
         <ion-label color=dark>{{transaction.name}}
-          <p text-wrap>{{transaction.accountName}}</p>
+          <div class="category-name ellipses-left">{{transaction.categoryName}}</div>
           <p>{{transaction.date | date:'mediumDate'}}</p>
         </ion-label>
-        <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
-          <span style="float: right;">{{transaction.amount/100 | currency}}</span>
-          <div style="padding-top: 28px;"></div>
-          <span style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
-        </ion-note>
 
+        <ion-note item-end>
+          <span class="float-right" [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+            <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Inflow'" name="md-arrow-round-down" color="wintergreen"></ion-icon>
+            <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Transfer'" name="md-swap" color="buttonblue"></ion-icon>
+            <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Outflow'" name="md-arrow-round-up" color="cardinalred"></ion-icon>
+            {{transaction.amount/100 | currency}}</span>
+          <div class="top-spacer"></div>
+          <span class="ellipses-right" [ngClass]="transaction.direction == 'Inflow'  ? 'inflow-account-name' : (transaction.direction == 'Outflow' ? 'outflow-account-name' : 'transfer-account-name')">{{transaction.accountName}}</span>
+        </ion-note>
       </ion-item>
       <ion-item-options (ionSwipe)="clear(slidingItem, transaction._id)" side="left">
         <button class="swipe-buttons" ion-button expandable (click)="clear(slidingItem, transaction._id)">
@@ -78,7 +88,9 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <!-- PENDING TRANSACTIONS -->
 
+  <!-- CLEARED TRANSACTIONS -->
   <ion-item-divider class="header" color="headercolor">Cleared Transactions</ion-item-divider>
   <ion-card *ngIf="clearedTransactions.length == 0">
     <ion-card-content>
@@ -89,19 +101,25 @@
     <ion-item text-wrap *ngFor='let transaction of clearedTransactions'>
       <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
-        <p text-wrap>{{transaction.accountName}}</p>
+        <div class="category-name ellipses-left">{{transaction.categoryName}}</div>
         <p>{{transaction.date | date:'mediumDate'}}</p>
       </ion-label>
-      <ion-note item-end [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
-        <span style="float: right;">
+
+      <ion-note item-end>
+        <span class="float-right" [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Inflow'" name="md-arrow-round-down" color="wintergreen"></ion-icon>
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Transfer'" name="md-swap" color="buttonblue"></ion-icon>
+          <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Outflow'" name="md-arrow-round-up" color="cardinalred"></ion-icon>
           {{transaction.amount/100 | currency}}</span>
-        <div style="padding-top: 28px;"></div>
-        <span style="float: right; color: #799496; font-size: 14px;">{{transaction.categoryName}}</span>
+        <div class="top-spacer"></div>
+        <span class="ellipses-right" [ngClass]="transaction.direction == 'Inflow'  ? 'inflow-account-name' : (transaction.direction == 'Outflow' ? 'outflow-account-name' : 'transfer-account-name')">{{transaction.accountName}}</span>
       </ion-note>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll *ngIf="!noMoreTransactions" (ionInfinite)="$event.waitFor(doInfinite())">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+  <!-- CLEARED TRANSACTIONS -->
+
 
 </ion-content>

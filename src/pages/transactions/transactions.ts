@@ -101,27 +101,42 @@ export class TransactionsPage {
 
   getAccountName(sourceId, destId) {
     let accountName = "";
-    let endingString = ""
-    if (destId) {
+    if (destId && sourceId) {
+      let endingString = "";
       for (let i = 0; i < this.accounts.length; i++) {
         if (this.accounts[i]._id === destId) {
           endingString = " to " + this.accounts[i].name;
         }
       }
-    }
-
-    for (let i = 0; i < this.accounts.length; i++) {
-      if (this.accounts[i]._id === sourceId) {
-        accountName = this.accounts[i].name + endingString
+      for (let i = 0; i < this.accounts.length; i++) {
+        if (this.accounts[i]._id === sourceId) {
+          accountName = this.accounts[i].name + endingString
+        }
       }
     }
 
-    if (accountName === "") {
-      return "N/A";
+    else if (sourceId) {
+      for (let i = 0; i < this.accounts.length; i++) {
+        if (this.accounts[i]._id === sourceId) {
+          accountName = this.accounts[i].name;
+        }
+      }
     }
+
+    else if (destId) {
+      for (let i = 0; i < this.accounts.length; i++) {
+        if (this.accounts[i]._id === destId) {
+          accountName = this.accounts[i].name;
+        }
+      }
+    }
+
     else {
-      return accountName;
+      accountName = "N/A";
     }
+
+    return accountName;
+
   }
 
   getCategoryName(sourceId, destId) {
@@ -147,6 +162,10 @@ export class TransactionsPage {
       this.transactionsProvider.filterTransactions(text).then(
         (result) => {
           this.filterItems = result;
+          for (let i = 0; i < this.filterItems.length; i++) {
+            this.filterItems[i].categoryName = this.getCategoryName(this.filterItems[i].sourceCatId, this.filterItems[i].destCatId);
+            this.filterItems[i].accountName = this.getAccountName(this.filterItems[i].sourceAcctId, this.filterItems[i].destAcctId);
+          }
           this.content.resize();
         }
       )

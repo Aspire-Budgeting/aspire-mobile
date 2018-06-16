@@ -1,3 +1,59 @@
-page-about {
+page-transactions{
+    @mixin basic-name{
+        padding-right: 3px;
+        color: map-get($colors, phantomgray);
+        font-size: 14px;
+        font-weight: bold;
+    }
 
+    .category-name{
+        @include basic-name();
+    }
+
+    .inflow-account-name{
+        @include basic-name();
+        float: right;
+        color: map-get($colors, wintergreen);
+    }
+
+    .outflow-account-name{
+        @include basic-name();
+        float: right;
+        color: map-get($colors, cardinalred);
+    }
+
+    .transfer-account-name{
+        @include basic-name();
+        float: right;
+        color: map-get($colors, buttonblue);
+    }
+
+    .ellipses-right{
+        display: block;
+        width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: right;
+    }
+
+    .ellipses-left{
+        display: block;
+        width: 130px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .float-right{
+        float: right;
+    }
+
+    .top-spacer{
+        padding-top: 38px;
+    }
+
+    .icon-margin{
+        margin: 0 3px 0 0;
+    }
 }

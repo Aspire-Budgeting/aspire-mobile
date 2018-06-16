@@ -23,6 +23,8 @@ import { TransactionsProvider } from '../providers/transactions/transactions';
 import { MoneyProvider } from '../providers/money/money';
 import { SorterProvider } from '../providers/sorter/sorter';
 
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { SorterProvider } from '../providers/sorter/sorter';
     TransactionsProvider,
     MoneyProvider,
     SorterProvider,
+    InAppBrowser,
   ]
 })
 export class AppModule { }

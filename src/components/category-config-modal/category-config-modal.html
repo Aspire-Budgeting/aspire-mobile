@@ -30,7 +30,7 @@
         <ion-input formControlName="categoryName" placeholder="Name" [(ngModel)]="categoryName"></ion-input>
       </ion-item>
       <ion-item *ngIf="!createGroup">
-        <ion-label stacked [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Amount</ion-label>
+        <ion-label stacked [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Target Amount</ion-label>
         <ion-input formControlName="amount" type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
       </ion-item>
     </form>
