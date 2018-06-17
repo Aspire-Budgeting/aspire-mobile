@@ -27,4 +27,34 @@ page-dashboard{
     .header-ios .toolbar-ios:last-child .toolbar-background-ios {
         border-width: 0 0 0px !important;
     }
+
+    .zero-padding{
+        padding: 0px;
+    }
+
+    .hud-card{
+        padding-top: 3px;
+        text-align: center;
+        height: 40px;
+        background-color: lighten(map-get($colors, graphite), 6%);;
+        border-radius: 10px;
+    }
+
+    .icon-size{
+        font-size: 28px;
+    }
+
+    .hud-text-calendar{
+        font-size: 26px;
+        color: map-get($colors, buttonblue);
+    }
+
+    .hud-text-pending{
+        font-size: 26px;
+        color: map-get($colors, fogyellow);
+    }
+
+    .no-border{
+        border: none !important;
+    }
 }

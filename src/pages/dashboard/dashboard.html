@@ -12,7 +12,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar *ngIf="showHUD" color="graphite" no-border-top>
-    <ion-toolbar style="border: none !important;" no-border-top color="graphite">
+    <ion-toolbar class="no-border" no-border-top color="graphite">
       <ion-segment [(ngModel)]="columnSetting" color=mediumgray>
         <ion-segment-button value="AVAILABLE">
           AVAILABLE
@@ -25,18 +25,18 @@
         </ion-segment-button>
       </ion-segment>
     </ion-toolbar>
-    <ion-grid style="padding: 0px">
-      <ion-row style="padding: 0px">
-        <ion-col style="padding: 0px">
-          <ion-card style="padding-top: 3px; text-align: center; height: 40px; background-color: #424459; border-radius: 15px;">
-            <ion-icon style="font-size: 28px" color=buttonblue name="md-calendar"></ion-icon>
-            <span style="font-size: 26px; color: #78B3D3">{{daysLeftInMonth}}</span>
+    <ion-grid class="zero-padding">
+      <ion-row class="zero-padding">
+        <ion-col class="zero-padding">
+          <ion-card class="hud-card">
+            <ion-icon class="icon-size" color=buttonblue name="md-calendar"></ion-icon>
+            <span class="hud-text-calendar">{{daysLeftInMonth}}</span>
           </ion-card>
         </ion-col>
-        <ion-col style="padding: 0px">
-          <ion-card style="padding-top: 3px; text-align: center; height: 40px; background-color: #424459; border-radius: 15px;">
-            <ion-icon style="font-size: 28px" color=fogyellow name="md-checkbox"></ion-icon>
-            <span style="font-size: 26px; color: #FFF6B7">{{pendingTransactions}}</span>
+        <ion-col class="zero-padding">
+          <ion-card class="hud-card">
+            <ion-icon class="icon-size" color=fogyellow name="md-checkbox"></ion-icon>
+            <span class="hud-text-pending">{{pendingTransactions}}</span>
           </ion-card>
         </ion-col>
         <!--<ion-col style="padding: 0px">

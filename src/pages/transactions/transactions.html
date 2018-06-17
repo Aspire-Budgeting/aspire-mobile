@@ -42,15 +42,19 @@
   </ion-list>
 </ion-content>
 
-<!-- PENDING TRANSACTIONS -->
 <ion-content *ngIf="isFiltering == false" class="app-background" #content>
-  <ion-item-divider class="header" color="headercolor">Pending Transactions</ion-item-divider>
-  <ion-card class="aspire-card" *ngIf="pendingTransactions.length == 0">
+
+  <!--NO TRANSACTIONS-->
+  <ion-card class="aspire-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
     <ion-card-content>
-      You don't have any Pending Transactions.
+      You don't have any Transactions.
     </ion-card-content>
   </ion-card>
-  <ion-list>
+
+
+  <!-- PENDING TRANSACTIONS -->
+  <ion-item-divider *ngIf="pendingTransactions.length != 0" class="header" color="headercolor">Pending Transactions</ion-item-divider>
+  <ion-list *ngIf="pendingTransactions.length != 0">
     <ion-item-sliding *ngFor='let transaction of pendingTransactions' #slidingItem>
       <ion-item text-wrap>
         <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
@@ -91,13 +95,8 @@
   <!-- PENDING TRANSACTIONS -->
 
   <!-- CLEARED TRANSACTIONS -->
-  <ion-item-divider class="header" color="headercolor">Cleared Transactions</ion-item-divider>
-  <ion-card *ngIf="clearedTransactions.length == 0">
-    <ion-card-content>
-      You don't have any Cleared Transactions.
-    </ion-card-content>
-  </ion-card>
-  <ion-list>
+  <ion-item-divider *ngIf="clearedTransactions.length != 0" class="header" color="headercolor">Cleared Transactions</ion-item-divider>
+  <ion-list *ngIf="clearedTransactions.length != 0">
     <ion-item text-wrap *ngFor='let transaction of clearedTransactions'>
       <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}

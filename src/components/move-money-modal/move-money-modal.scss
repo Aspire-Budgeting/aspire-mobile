@@ -15,4 +15,39 @@ move-money-modal {
     @include categoryAmount();
     background-color: map-get($colors, graphite);
   }
+
+   @mixin moveMoneyHeader{
+    color: #535354;
+    font-size: 18px;
+    padding: 5px 0 5px 0;
+    border-top: 1px solid lighten(map-get($colors, mediumgray), 10%);
+    border-bottom: 1px solid lighten(map-get($colors, mediumgray), 10%);
+    background-color: map-get($colors, lightgray);
+    text-align: center;
+  }
+
+  .moveMoneyHeaderTop{
+    @include moveMoneyHeader();
+    border-top: 0px solid lighten(map-get($colors, mediumgray), 10%);
+  }
+
+  .moveMoneyHeaderBottom{
+    @include moveMoneyHeader();
+  }
+
+  .backdrop{
+    text-align: center;
+    background-color: white;
+    padding-top: 25px;
+    padding-bottom: 35px;
+  }
+
+  .moveMoneyText{
+    color: #535354;
+    font-size: 16px;
+  }
+
+  .spacer{
+    height: 22px;
+  }
 }

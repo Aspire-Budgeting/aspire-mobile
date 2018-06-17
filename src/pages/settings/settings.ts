@@ -28,12 +28,12 @@ export class SettingsPage {
   }
 
   openThanksTo(){
-    let browser = this.iab.create('http://apache.org', '_blank', 'location=yes');
+    let browser = this.iab.create('http://aspirebudget.com/thanksto.html', '_blank', 'location=yes');
     browser.show();
   }
 
   openPrivacyPolicy(){
-    let browser = this.iab.create('http://apache.org', '_blank', 'location=yes');
+    let browser = this.iab.create('http://aspirebudget.com/privacypolicy.html', '_blank', 'location=yes');
     browser.show();
   }
   

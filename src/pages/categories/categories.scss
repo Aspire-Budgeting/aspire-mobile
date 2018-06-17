@@ -2,5 +2,15 @@ page-categories {
     .ion-md-add-circle:before{
         color: white !important;
     }
+
+    .newButton{
+        font-weight: bold;
+        display: inline-block;
+        width: 98%;
+        margin-top: 0px;
+        margin-bottom: 15px;
+        border-bottom-left-radius: 50px;
+        border-bottom-right-radius: 50px;
+    }
 }
 

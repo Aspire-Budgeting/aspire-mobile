@@ -23,7 +23,7 @@
     <ion-card-header class="account-header">
       <ion-icon (click)="present(account)" class="account-icon" name="ios-settings"></ion-icon>
       <ion-icon class="type-icon" name={{getIcon(account)}}></ion-icon>
-      <span class="text" style="color: #535354;">{{account.name}}</span>
+      <span class="text">{{account.name}}</span>
     </ion-card-header>
     <ion-card-content class="account-amount">
       <span [ngClass]="account.amount > 0  ? 'pos-account' : (account.amount < 0 ? 'neg-account' : 'zero-account')">{{account.amount/100 | currency}}</span>

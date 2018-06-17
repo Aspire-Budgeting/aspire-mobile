@@ -14,7 +14,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar style="text-align: center" color=dark>
+  <ion-toolbar class="center-text" color=dark>
     <ion-segment [(ngModel)]="newTransactionData.direction" class="columnControls">
       <ion-segment-button [ngClass]="newTransactionData.direction == 'Outflow' ? 'outflowArrow' : 'inactiveArrow'" value="Outflow">
         <ion-icon name="md-arrow-round-up"></ion-icon>
