@@ -33,7 +33,7 @@ export class SettingsPage {
   }
 
   openPrivacyPolicy(){
-    let browser = this.iab.create('http://aspirebudget.com/privacypolicy.html', '_blank', 'location=yes');
+    let browser = this.iab.create('http://aspirebudget.com/privacy.html', '_blank', 'location=yes');
     browser.show();
   }
   
