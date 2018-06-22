@@ -60,7 +60,8 @@ export class CategoriesPage {
     )
   }
 
-  updateDetails(action, object){
+  updateDetails(action, object, slidingItem){
+    setTimeout(() => slidingItem.close(), 500);
     let modal = this.modalCtrl.create(CategoryConfigModalComponent,
       {
         object: object,
