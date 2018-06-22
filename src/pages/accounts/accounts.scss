@@ -23,21 +23,20 @@ page-accounts {
     }
     .account-icon{
         float: right;
-        color: #535354;
+        color: map-get($colors, graphite);
     }
 
     .type-icon{
-        color: #535354;
         font-size: 30px;
         display: inline-block;
         vertical-align: middle;
-        margin-right: 5px;
+        color: map-get($colors, graphite);
     }
   
     .text{
         display: inline-block;
         vertical-align: middle;
-        color: map-get($colors, phantomgray);
+        color: map-get($colors, graphite);
     }
     
     /*.card-color1{background: map-get($colors, seaweedgreen)}
