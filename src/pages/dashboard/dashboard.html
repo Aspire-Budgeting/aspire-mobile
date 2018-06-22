@@ -53,9 +53,9 @@
 </ion-header>
 
 <ion-content class="app-background" #content>
-  <ion-card class="aspire-card" *ngIf="categoriesContainer.length == 0">
+  <ion-card class="empty-card" *ngIf="categoriesContainer.length == 0">
     <ion-card-content>
-      You don't have any Categories.
+      Welcome! Let's get started! You currently don't have any Groups or Categories. To add a Group or a Category, go to Settings.
     </ion-card-content>
   </ion-card>
   <ion-list *ngFor="let group of categoriesContainer">

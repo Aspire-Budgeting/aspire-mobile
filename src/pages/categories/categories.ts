@@ -120,7 +120,7 @@ export class CategoriesPage {
               let newTransactionData = {
                 name: "Deleting category: " + name,
                 status: "Cleared",
-                date: (new Date()).toISOString(),
+                date: this.transactionProvider.getNewDate(),
                 amount: Number(category.amount)/100,
                 direction: null,
                 visible: false,
@@ -160,7 +160,7 @@ export class CategoriesPage {
             let newTransactionData = {
               name: "Deleting category: " + name,
               status: "Cleared",
-              date: (new Date()).toISOString(),
+              date: this.transactionProvider.getNewDate(),
               amount: Number(amount)/100,
               direction: null,
               visible: false,

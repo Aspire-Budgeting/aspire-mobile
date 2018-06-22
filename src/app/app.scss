@@ -89,6 +89,15 @@
   border: solid lighten(map-get($colors, mediumgray), 10%);
   border-width: 1px;
   box-shadow: none !important;
+}
 
+.empty-card{
+  border-radius: 5px !important;
+  border-style: solid;
+  border: solid lighten(map-get($colors, mediumgray), 10%);
+  border-width: 1px;
+  box-shadow: none !important;
+  font-weight: 800 !important;
+  color: map-get($colors, graphite);
 }
 

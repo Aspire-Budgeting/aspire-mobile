@@ -16,9 +16,9 @@
 
 <ion-content *ngIf="isFiltering == true" class="app-background" #content>
   <ion-item-divider class="header" color="headercolor">Filtered Transactions</ion-item-divider>
-  <ion-card class="aspire-card" *ngIf="filterItems.length == 0">
+  <ion-card class="empty-card" *ngIf="filterItems.length == 0">
     <ion-card-content>
-      No transactions found.
+      No transactions found matching your criteria.
     </ion-card-content>
   </ion-card>
   <ion-list>
@@ -45,9 +45,9 @@
 <ion-content *ngIf="isFiltering == false" class="app-background" #content>
 
   <!--NO TRANSACTIONS-->
-  <ion-card class="aspire-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
+  <ion-card class="empty-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
     <ion-card-content>
-      You don't have any Transactions.
+      You don't have any Transactions. Press the '+' button in the tab bar below to add a Transaction.
     </ion-card-content>
   </ion-card>
 

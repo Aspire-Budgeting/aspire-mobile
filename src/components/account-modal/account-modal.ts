@@ -41,7 +41,7 @@ export class AccountModalComponent {
   constructor(public viewCtrl: ViewController, public accountProvider: AccountsProvider, public navParams: NavParams,
     public transactionProvider: TransactionsProvider, public moneyProvider: MoneyProvider,
     public categoryProvider: CategoriesProvider, public events: Events, public formBuilder: FormBuilder) {
-    this.newTransactionData.date = (new Date()).toISOString();
+    this.newTransactionData.date = this.transactionProvider.getNewDate();
 
     this.new = this.navParams.get('new');
     if (this.new == false) {

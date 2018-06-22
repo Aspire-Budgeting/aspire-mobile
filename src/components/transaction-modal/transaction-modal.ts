@@ -78,7 +78,7 @@ export class TransactionModalComponent {
     }
 
     else {
-      this.newTransactionData.date = (new Date()).toISOString();
+      this.newTransactionData.date = this.transactionsProvider.getNewDate();
     }
 
     this.categoriesProvider.getAllCategories().then(

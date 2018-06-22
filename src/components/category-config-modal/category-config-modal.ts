@@ -11,7 +11,7 @@ export class CategoryConfigModalComponent {
 
   parentId: string = "";
   categoryName: string = "";
-  categoryTargetAmount: number = 0;
+  categoryTargetAmount: number;
   groupName: string = "";
   title = "New Category";
 
@@ -51,7 +51,7 @@ export class CategoryConfigModalComponent {
 
     this.categoryForm = formBuilder.group({
       categoryName: ['', Validators.compose([Validators.required])],
-      amount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+      amount: ['', Validators.compose([Validators.pattern("^\\d+(\\.\\d{2})?$"), Validators.required])],
     });
   }
 

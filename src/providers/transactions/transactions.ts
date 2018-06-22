@@ -49,4 +49,10 @@ export class TransactionsProvider {
   updateTransaction(transaction) {
     return this.database.updateTransaction(transaction);
   }
+
+  getNewDate() {
+    let date = new Date(); // Or the date you'd like converted.
+    let isoDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString();
+    return isoDate;
+  }
 }
