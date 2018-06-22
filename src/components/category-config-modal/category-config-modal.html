@@ -3,12 +3,12 @@
     <ion-title>
       {{title}}
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons left>
       <button ion-button icon-only (click)="dismiss()">
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons right>
       <button ion-button icon-only (click)="save()">
         <ion-icon name="md-checkmark-circle"></ion-icon>
       </button>
@@ -19,17 +19,17 @@
 <ion-content class="app-background">
   <ion-list>
     <form [formGroup]="groupForm">
-      <ion-item *ngIf="createGroup">
+      <ion-item *ngIf="action == 'ng' || action == 'ug'">
         <ion-label stacked [class.invalid]="!groupForm.controls.groupName.valid && this.submitted" color="darkgray">Group Name</ion-label>
         <ion-input formControlName="groupName" placeholder="Name" [(ngModel)]="groupName"></ion-input>
       </ion-item>
     </form>
     <form [formGroup]="categoryForm">
-      <ion-item *ngIf="!createGroup">
+      <ion-item *ngIf="action == 'nc' || action == 'uc'">
         <ion-label stacked [class.invalid]="!categoryForm.controls.categoryName.valid && this.submitted" color="darkgray">Category Name</ion-label>
         <ion-input formControlName="categoryName" placeholder="Name" [(ngModel)]="categoryName"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!createGroup">
+      <ion-item *ngIf="action == 'nc' || action == 'uc'">
         <ion-label stacked [class.invalid]="!categoryForm.controls.amount.valid && this.submitted" color="darkgray">Target Amount</ion-label>
         <ion-input formControlName="amount" type="number" placeholder="0.00" [(ngModel)]="categoryTargetAmount"></ion-input>
       </ion-item>

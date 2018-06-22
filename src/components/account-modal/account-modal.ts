@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController } from 'ionic-angular';
+import { ViewController, NavParams } from 'ionic-angular';
 import { AccountsProvider } from '../../providers/accounts/accounts';
 import { TransactionsProvider } from '../../providers/transactions/transactions';
 import { MoneyProvider } from '../../providers/money/money';
@@ -35,17 +35,29 @@ export class AccountModalComponent {
 
   form = null;
   submitted = false;
+  new = true;
+  title = "New Account";
 
-  constructor(public viewCtrl: ViewController, public accountProvider: AccountsProvider,
+  constructor(public viewCtrl: ViewController, public accountProvider: AccountsProvider, public navParams: NavParams,
     public transactionProvider: TransactionsProvider, public moneyProvider: MoneyProvider,
     public categoryProvider: CategoriesProvider, public events: Events, public formBuilder: FormBuilder) {
     this.newTransactionData.date = (new Date()).toISOString();
 
-    this.form = formBuilder.group({
-      accountName: ['', Validators.compose([Validators.required])],
-      currentAmount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
-      accountType: ['', Validators.compose([Validators.required])],
-    });
+    this.new = this.navParams.get('new');
+    if (this.new == false) {
+      this.title = "Edit Account";
+      this.accountData = this.navParams.get('account');
+      this.form = formBuilder.group({
+        accountName: ['', Validators.compose([Validators.required])],
+      });
+    } else {
+      this.new = true;
+      this.form = formBuilder.group({
+        accountName: ['', Validators.compose([Validators.required])],
+        currentAmount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+        accountType: ['', Validators.compose([Validators.required])],
+      });
+    }
   }
 
   dismiss(): void {
@@ -56,43 +68,56 @@ export class AccountModalComponent {
 
     this.submitted = true;
 
-    if(!this.form.valid){
+    if (!this.form.valid) {
       return;
     }
 
-    let promiseStructure = this.accountProvider.addAccount(this.accountData).then(
-      (account) => {
-        return this.moneyProvider.getAvailableToBudget().then(
-          (atob) => {
+    let promiseStructure;
 
-            this.newTransactionData.name += this.accountData.name;
+    console.log(this.new);
 
-            if (this.accountData.type === "b" || this.accountData.type === "m") {
-              this.newTransactionData.direction = "Inflow";
-              this.newTransactionData.destCatId = atob._id;
-              this.newTransactionData.destAcctId = account.id;
-            }
-            else if (this.accountData.type === "c") {
-              this.newTransactionData.direction = "Outflow";
-              this.newTransactionData.sourceCatId = atob._id;
-              this.newTransactionData.sourceAcctId = account.id;
-            }
-            return this.transactionProvider.addTransaction(this.newTransactionData).then(
-              () => {
-                return this.moneyProvider.getAccountTotal(account.id).then(
-                  (acctTotal) => {
-                    return this.accountProvider.updateAccountAmount(account.id, acctTotal).then(
-                      () => {
-                        return this.moneyProvider.getCategoryTotal(atob._id).then(
-                          (catTotal) => {
-                            return this.categoryProvider.updateCategoryAmount(atob._id, catTotal);
-                          });
-                      });
-                  });
-              });
-          });
-      }
-    );
+    // edit
+    if (this.new == false) {
+      console.log("edit");
+      promiseStructure = this.accountProvider.updateAccount(this.accountData);
+    }
+
+    else {
+      // add new
+      promiseStructure = this.accountProvider.addAccount(this.accountData).then(
+        (account) => {
+          return this.moneyProvider.getAvailableToBudget().then(
+            (atob) => {
+
+              this.newTransactionData.name += this.accountData.name;
+
+              if (this.accountData.type === "b" || this.accountData.type === "m") {
+                this.newTransactionData.direction = "Inflow";
+                this.newTransactionData.destCatId = atob._id;
+                this.newTransactionData.destAcctId = account.id;
+              }
+              else if (this.accountData.type === "c") {
+                this.newTransactionData.direction = "Outflow";
+                this.newTransactionData.sourceCatId = atob._id;
+                this.newTransactionData.sourceAcctId = account.id;
+              }
+              return this.transactionProvider.addTransaction(this.newTransactionData).then(
+                () => {
+                  return this.moneyProvider.getAccountTotal(account.id).then(
+                    (acctTotal) => {
+                      return this.accountProvider.updateAccountAmount(account.id, acctTotal).then(
+                        () => {
+                          return this.moneyProvider.getCategoryTotal(atob._id).then(
+                            (catTotal) => {
+                              return this.categoryProvider.updateCategoryAmount(atob._id, catTotal);
+                            });
+                        });
+                    });
+                });
+            });
+        }
+      );
+    }
 
     Promise.all([promiseStructure]).then(
       () => {

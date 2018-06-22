@@ -10,15 +10,16 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CategoryConfigModalComponent {
 
   parentId: string = "";
-  createGroup: boolean = false;
   categoryName: string = "";
-  categoryTargetAmount: string = "";
+  categoryTargetAmount: number = 0;
   groupName: string = "";
   title = "New Category";
 
   groupForm = null;
   categoryForm = null;
   submitted = false;
+  action;
+  object;
 
   constructor(
     public viewCtrl: ViewController,
@@ -28,11 +29,21 @@ export class CategoryConfigModalComponent {
     public events: Events, public formBuilder: FormBuilder) {
 
     this.parentId = navParams.get('parentId');
-    this.createGroup = navParams.get('createGroup');
-    if (this.createGroup) {
+    this.action = navParams.get('action');
+    console.log(this.action);
+    this.object = navParams.get('object');
+    if (this.action == "ng") {
       this.title = "New Group";
     }
-
+    else if(this.action == "ug"){
+      this.groupName = this.object.name;
+      this.title = "Edit Group";
+    }
+    else if(this.action == "uc"){
+      this.title = "Edit Category";
+      this.categoryTargetAmount = Number(this.object.targetAmount)/100;
+      this.categoryName = this.object.name;
+    }
 
     this.groupForm = formBuilder.group({
       groupName: ['', Validators.compose([Validators.required])]
@@ -52,16 +63,33 @@ export class CategoryConfigModalComponent {
       return;
     }
 
-    if (this.createGroup) {
+    if(this.action == "ug"){
+      this.object.name = this.groupName;
+      this.categoriesProvider.updateGroup(this.object).then(
+        () => {
+          this.viewCtrl.dismiss();
+        });
+    }
+
+    else if(this.action == "uc"){
+      this.object.name = this.categoryName;
+      this.object.targetAmount = this.categoryTargetAmount;
+      this.categoriesProvider.updateCategory(this.object).then(
+        () => {
+          this.viewCtrl.dismiss();
+        });
+    }
+
+    else if (this.action == "ng") {
       this.categoriesProvider.addGroup(this.groupName).then(
-        result => {
+        () => {
           this.viewCtrl.dismiss();
         });
     }
 
     else {
       this.categoriesProvider.addCategory(this.categoryName, 0, this.categoryTargetAmount, this.parentId).then(
-        result => {
+        () => {
           this.viewCtrl.dismiss();
         });
     }

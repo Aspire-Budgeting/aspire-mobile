@@ -60,27 +60,27 @@ export class CategoriesProvider {
   }
 
   addCategory(name, amount, targetAmount, parent) {
-    return this.database.addCategory(name, amount, targetAmount, parent).then(
-      result => { }
-    )
+    return this.database.addCategory(name, amount, targetAmount, parent);
   }
 
   addGroup(name) {
-    return this.database.addCategoryHeader(name).then(
-      result => { }
-    )
+    return this.database.addCategoryHeader(name);
+  }
+
+  updateCategory(category){
+    return this.database.updateCategory(category);
+  }
+
+  updateGroup(group){
+    return this.database.updateGroup(group);
   }
 
   deleteGroup(id) {
-    return this.database.deleteGroup(id).then(
-      result => { }
-    )
+    return this.database.deleteGroup(id).then;
   }
 
   deleteCategory(id) {
-    return this.database.deleteCategory(id).then(
-      result => { }
-    )
+    return this.database.deleteCategory(id);
   }
 
   refreshAllCategories() {

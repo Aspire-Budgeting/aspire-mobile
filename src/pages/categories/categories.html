@@ -23,10 +23,10 @@
       </ion-item>
 
       <ion-item-options side="right">
-        <!--<button ion-button color="dark" (click)="noop()">
+        <button ion-button color="dark" (click)="updateDetails('ug', group)">
           <ion-icon name="md-create"></ion-icon>
           EDIT
-        </button>-->
+        </button>
         <button ion-button color="cardinalred" (click)="deleteGroup(group._id)">
           <ion-icon name="trash"></ion-icon>
           DELETE ALL
@@ -42,10 +42,10 @@
         </ion-note>
       </ion-item>
       <ion-item-options side="right">
-        <!--<button ion-button color="dark" (click)="noop()">
+        <button ion-button color="dark" (click)="updateDetails('uc', category)">
           <ion-icon name="md-create"></ion-icon>
           EDIT
-        </button>-->
+        </button>
         <button ion-button color="cardinalred" (click)="deleteCategory(category._id, category.name, category.amount)">
           <ion-icon name="trash"></ion-icon>
           DELETE

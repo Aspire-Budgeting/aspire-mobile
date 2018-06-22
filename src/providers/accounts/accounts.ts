@@ -42,6 +42,10 @@ export class AccountsProvider {
     return this.database.updateAccountAmount(id, amount);
   }
 
+  updateAccount(account){
+    return this.database.updateAccount(account);
+  }
+
   refreshAllAccounts() {
     return this.getAccounts().then(
       accounts => {

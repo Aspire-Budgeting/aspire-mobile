@@ -94,16 +94,17 @@ export class AccountsPage {
             });
           }
         },
-        /*{
-          text: 'Edit',
+        {
+          text: 'Change Name',
           handler: () => {
-            let account = this.accounts.find(function (account) {
-              return account.uuid === uuid;
-            })
-
-            if (account) this.accounts[account].name
+            let modal = this.modalCtrl.create(AccountModalComponent,
+              {
+                account: account,
+                new: false,
+              });
+            modal.present();
           }
-        },*/
+        },
         {
           text: 'Cancel',
           role: 'cancel', // will always sort to be on the bottom

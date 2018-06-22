@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar color=dark>
     <ion-title>
-      New Account
+      {{title}}
     </ion-title>
-    <ion-buttons start>
+    <ion-buttons left>
       <button ion-button icon-only (click)="dismiss()">
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons right>
       <button ion-button icon-only (click)="save()">
         <ion-icon name="md-checkmark-circle"></ion-icon>
       </button>
@@ -24,11 +24,11 @@
         <ion-label stacked [class.invalid]="!form.controls.accountName.valid && this.submitted" color="darkgray">Account Name</ion-label>
         <ion-input formControlName="accountName" placeholder="Name" [(ngModel)]="accountData.name"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="new == true">
         <ion-label stacked [class.invalid]="!form.controls.currentAmount.valid && this.submitted" color="darkgray">Current Amount</ion-label>
         <ion-input formControlName="currentAmount" [(ngModel)]="newTransactionData.amount" type="number" placeholder="0.00"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="new == true">
         <ion-label [class.invalid]="!form.controls.accountType.valid && this.submitted" color="darkgray">Account Type</ion-label>
         <ion-select formControlName="accountType" placeholder="Select" [(ngModel)]="accountData.type">
           <ion-option value="b">Bank Account</ion-option>

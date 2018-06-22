@@ -35,6 +35,7 @@ export class CategoriesPage {
     let modal = this.modalCtrl.create(CategoryConfigModalComponent,
       {
         parentId: parentId,
+        action: "nc",
       });
     modal.present();
     modal.onDidDismiss(
@@ -48,7 +49,22 @@ export class CategoriesPage {
   createNewGroup() {
     let modal = this.modalCtrl.create(CategoryConfigModalComponent,
       {
-        createGroup: true,
+        action: "ng",
+      });
+    modal.present();
+    modal.onDidDismiss(
+      () => {
+        this.refreshCategoryList();
+        this.events.publish('categories:changed');
+      }
+    )
+  }
+
+  updateDetails(action, object){
+    let modal = this.modalCtrl.create(CategoryConfigModalComponent,
+      {
+        object: object,
+        action: action,
       });
     modal.present();
     modal.onDidDismiss(
