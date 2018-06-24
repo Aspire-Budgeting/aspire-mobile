@@ -73,7 +73,7 @@ export class CategoryConfigModalComponent {
 
     else if(this.action == "uc"){
       this.object.name = this.categoryName;
-      this.object.targetAmount = this.categoryTargetAmount;
+      this.object.targetAmount = Number(this.categoryTargetAmount)*100;
       this.categoriesProvider.updateCategory(this.object).then(
         () => {
           this.viewCtrl.dismiss();
