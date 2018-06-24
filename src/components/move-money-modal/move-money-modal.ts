@@ -46,7 +46,7 @@ export class MoveMoneyModalComponent {
     public moneyProvider: MoneyProvider, public events: Events, public transactionProvider: TransactionsProvider, private formBuilder: FormBuilder) {
 
     this.form = formBuilder.group({
-      amount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+      amount: ['', Validators.compose([Validators.pattern("^\\d+(\\.\\d{2})?$"), Validators.required])],
     });
 
     this.newTransactionData.direction = navParams.get('moneyDirection');

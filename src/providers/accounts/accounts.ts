@@ -5,23 +5,6 @@ import { MoneyProvider } from '../money/money';
 @Injectable()
 export class AccountsProvider {
 
-  cardColors = [
-    'card-color1',
-    'card-color2',
-    'card-color3',
-    'card-color4',
-    'card-color5',
-    'card-color6',
-  ];
-
-  cardBackgrounds = [
-    'card-background1',
-    'card-background2',
-    'card-background3',
-    'card-background4',
-    'card-background5',
-  ];
-
   constructor(public database: DatabaseProvider, public moneyProvider: MoneyProvider) {
 
   }
@@ -42,7 +25,7 @@ export class AccountsProvider {
     return this.database.updateAccountAmount(id, amount);
   }
 
-  updateAccount(account){
+  updateAccount(account) {
     return this.database.updateAccount(account);
   }
 
@@ -59,17 +42,5 @@ export class AccountsProvider {
         let promise = Promise.all(allPromises);
         return promise;
       });
-  }
-
-  getCardClass(): string {
-    let classString = 'account-card ';
-    classString += this.cardColors[this.random(this.cardColors.length)];
-    classString += ' ';
-    classString += this.cardBackgrounds[this.random(this.cardBackgrounds.length)];
-    return classString;
-  }
-
-  random(cap): number {
-    return Math.floor(Math.random() * cap);
   }
 }

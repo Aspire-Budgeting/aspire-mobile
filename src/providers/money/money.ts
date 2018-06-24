@@ -10,15 +10,6 @@ export class MoneyProvider {
     return this.database.getAvailableToBudget();
   }
 
-  addFunds(amount: number) {
-    return this.getAvailableToBudget().then(
-      atob => {
-        atob.amount += amount;
-        this.database.updateAvailableToBudget(atob);
-      }
-    )
-  }
-
   updateAvailableToBudget(atob) {
     return this.database.updateAvailableToBudget(atob);
   }

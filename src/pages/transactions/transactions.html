@@ -45,7 +45,7 @@
 <ion-content *ngIf="isFiltering == false" class="app-background" #content>
 
   <!--NO TRANSACTIONS-->
-  <ion-card class="empty-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
+  <ion-card text-center class="empty-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
     <ion-card-content>
       You don't have any Transactions. Press the '+' button in the tab bar below to add a Transaction.
     </ion-card-content>

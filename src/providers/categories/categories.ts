@@ -36,9 +36,7 @@ export class CategoriesProvider {
   }
 
   getAllCategories() {
-    return this.database.getAllCategories().then(
-      result => { return result }
-    )
+    return this.database.getAllCategories();
   }
 
   getChildCategoriesOfParent(id) {
@@ -46,9 +44,7 @@ export class CategoriesProvider {
   }
 
   getAllUserDefinedCategories() {
-    return this.database.getAllUserDefinedCategories().then(
-      result => { return result }
-    )
+    return this.database.getAllUserDefinedCategories();
   }
 
   getTotalSpentThisMonthForCategory(categoryId) {
@@ -76,7 +72,7 @@ export class CategoriesProvider {
   }
 
   deleteGroup(id) {
-    return this.database.deleteGroup(id).then;
+    return this.database.deleteGroup(id);
   }
 
   deleteCategory(id) {

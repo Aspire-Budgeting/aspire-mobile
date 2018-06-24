@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, AlertController, ActionSheetController } from 'ionic-angular';
+import { ModalController, ActionSheetController } from 'ionic-angular';
 import { AccountModalComponent } from '../../components/account-modal/account-modal';
 import { AccountsProvider } from '../../providers/accounts/accounts';
 import { Events } from 'ionic-angular';
@@ -16,7 +16,7 @@ export class AccountsPage {
 
   accounts: any = [];
 
-  constructor(public modalCtrl: ModalController, public alertDialogCtrl: AlertController, public alertCtrl: ActionSheetController, public accountsProvider: AccountsProvider,
+  constructor(public modalCtrl: ModalController, public alertCtrl: ActionSheetController, public accountsProvider: AccountsProvider,
     public events: Events, public sorter: SorterProvider, public transactionsProvider: TransactionsProvider, public categoriesProvider: CategoriesProvider,
     public moneyProvider: MoneyProvider) {
     this.refreshAccounts();
@@ -52,13 +52,12 @@ export class AccountsPage {
     let actionSheet = this.alertCtrl.create({
       buttons: [
         {
-          text: 'Delete',
+          text: 'Remove',
           role: 'destructive',
           handler: () => {
 
-            let alert = this.alertDialogCtrl.create({
-              title: 'Delete Account?',
-              message: "Your Available to Budget amount will be updated to reflect this account being removed.",
+            let alert = this.alertCtrl.create({
+              title: 'Your Available to Budget amount will be updated to reflect this account being removed. Removing an account with a positive balance will result in a deduction from Available to Budget while removing an account with a negative balance will result in an addition to Available to Budget.',
               buttons: [
                 {
                   text: 'Cancel',
@@ -68,7 +67,7 @@ export class AccountsPage {
                   }
                 },
                 {
-                  text: 'Delete',
+                  text: 'Remove Account',
                   role: 'destructive',
                   handler: () => {
                     this.accountsProvider.deleteAccount(account._id).then(() => {

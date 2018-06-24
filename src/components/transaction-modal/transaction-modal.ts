@@ -50,7 +50,7 @@ export class TransactionModalComponent {
 
     this.commonForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      amount: ['', Validators.compose([Validators.pattern("^-?\\d+(\\.\\d{2})?$"), Validators.required])],
+      amount: ['', Validators.compose([Validators.pattern("^\\d+(\\.\\d{2})?$"), Validators.required])],
       date: ['', Validators.compose([Validators.required])]
     });
 
