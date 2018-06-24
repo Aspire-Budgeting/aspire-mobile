@@ -50,15 +50,17 @@
     <form [formGroup]="outflowForm">
       <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
         <ion-label [class.invalid]="!outflowForm.controls.category.valid && this.submitted" color="darkgray">Category</ion-label>
-        <ion-select formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.sourceCatId">
+        <ion-select *ngIf = "categories.length > 1" formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.sourceCatId">
           <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "categories.length <= 1" item-end>No Categories</ion-note>
       </ion-item>
       <ion-item *ngIf="newTransactionData.direction == 'Outflow'">
         <ion-label [class.invalid]="!outflowForm.controls.account.valid && this.submitted" color="darkgray">Account</ion-label>
-        <ion-select formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
+        <ion-select *ngIf = "accounts.length > 0" formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
           <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "accounts.length == 0" item-end>No Accounts</ion-note>
       </ion-item>
     </form>
 
@@ -66,15 +68,17 @@
     <form [formGroup]="inflowForm">
       <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
         <ion-label [class.invalid]="!inflowForm.controls.category.valid && this.submitted" color="darkgray">Category</ion-label>
-        <ion-select formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.destCatId">
+        <ion-select *ngIf = "categories.length > 1" formControlName="category" placeholder="Select" [(ngModel)]="newTransactionData.destCatId">
           <ion-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "categories.length <= 1" item-end>No Categories</ion-note>
       </ion-item>
       <ion-item *ngIf="newTransactionData.direction == 'Inflow'">
         <ion-label [class.invalid]="!inflowForm.controls.account.valid && this.submitted" color="darkgray">Account</ion-label>
-        <ion-select formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
+        <ion-select *ngIf = "accounts.length > 0" formControlName="account" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
           <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "accounts.length == 0" item-end>No Accounts</ion-note>
       </ion-item>
     </form>
 
@@ -82,15 +86,17 @@
     <form [formGroup]="transferForm">
       <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
         <ion-label [class.invalid]="!transferForm.controls.source.valid && this.submitted" color="darkgray">Source</ion-label>
-        <ion-select formControlName="source" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
+        <ion-select *ngIf = "accounts.length > 0" formControlName="source" placeholder="Select" [(ngModel)]="newTransactionData.sourceAcctId">
           <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "accounts.length == 0" item-end>No Accounts</ion-note>
       </ion-item>
       <ion-item *ngIf="newTransactionData.direction == 'Transfer'">
         <ion-label [class.invalid]="!transferForm.controls.dest.valid && this.submitted" color="darkgray">Destination</ion-label>
-        <ion-select formControlName="dest" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
+        <ion-select *ngIf = "accounts.length > 0" formControlName="dest" placeholder="Select" [(ngModel)]="newTransactionData.destAcctId">
           <ion-option *ngFor="let account of accounts" [value]="account._id">{{account.name}}</ion-option>
         </ion-select>
+        <ion-note *ngIf = "accounts.length == 0" item-end>No Accounts</ion-note>
       </ion-item>
     </form>
 

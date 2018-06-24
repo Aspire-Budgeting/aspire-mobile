@@ -73,11 +73,8 @@ export class AccountModalComponent {
 
     let promiseStructure;
 
-    console.log(this.new);
-
     // edit
     if (this.new == false) {
-      console.log("edit");
       promiseStructure = this.accountProvider.updateAccount(this.accountData);
     }
 

@@ -4,7 +4,7 @@ import { MoneyProvider } from '../../providers/money/money';
 import { Events } from 'ionic-angular';
 import { TransactionsProvider } from '../../providers/transactions/transactions';
 import { CategoriesProvider } from '../../providers/categories/categories';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -43,7 +43,7 @@ export class MoveMoneyModalComponent {
   destCatNAme = null;
 
   constructor(public viewCtrl: ViewController, public navParams: NavParams, public categoriesProvider: CategoriesProvider,
-    public moneyProvider: MoneyProvider, public events: Events, public transactionProvider: TransactionsProvider, private formBuilder: FormBuilder) {
+    public moneyProvider: MoneyProvider, public events: Events, public transactionProvider: TransactionsProvider, public formBuilder: FormBuilder) {
 
     this.form = formBuilder.group({
       amount: ['', Validators.compose([Validators.pattern("^\\d+(\\.\\d{2})?$"), Validators.required])],

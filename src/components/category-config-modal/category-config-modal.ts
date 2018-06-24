@@ -30,7 +30,6 @@ export class CategoryConfigModalComponent {
 
     this.parentId = navParams.get('parentId');
     this.action = navParams.get('action');
-    console.log(this.action);
     this.object = navParams.get('object');
     if (this.action == "ng") {
       this.title = "New Group";
