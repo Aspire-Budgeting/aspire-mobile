@@ -323,7 +323,6 @@ export class DatabaseProvider {
   }
 
   updateCategory(category) {
-    category.targetAmount = Number(category.targetAmount)*100;
     return this._db.put(category)
       .then(result => { console.log(result) })
       .catch(err => { console.log(err) })
