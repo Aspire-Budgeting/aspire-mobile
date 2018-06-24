@@ -80,11 +80,11 @@ $tabs-ios-border-color: map-get($colors, mediumgray) !important;
 
 $text-input-md-show-success-highlight:      false !important;
 $text-input-md-show-error-highlight:        false !important;
-$text-input-md-highlight-color-invalid: transparent !important;
-$text-input-md-highlight-color-valid: transparent !important;
-$text-input-md-show-invalid-highlight: transparent !important;
-$text-input-md-highlight-color: transparent !important;
-$text-input-md-show-valid-highlight: transparent !important;
+$text-input-md-show-invalid-highlight: false !important;
+$text-input-md-show-valid-highlight: false !important;
+$text-input-md-highlight-color-invalid: #dedede !important;
+$text-input-md-highlight-color-valid: #dedede !important;
+$text-input-md-highlight-color: #dedede !important;
 
 
 
