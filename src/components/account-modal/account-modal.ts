@@ -30,7 +30,6 @@ export class AccountModalComponent {
     name: null,
     amount: 0,
     type: null,
-    cardClass: this.accountProvider.getCardClass(),
   }
 
   form = null;

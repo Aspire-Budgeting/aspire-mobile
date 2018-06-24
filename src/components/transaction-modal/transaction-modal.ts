@@ -6,6 +6,7 @@ import { AccountsProvider } from '../../providers/accounts/accounts';
 import { MoneyProvider } from '../../providers/money/money';
 import { Events } from 'ionic-angular';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SorterProvider } from '../../providers/sorter/sorter';
 
 @Component({
   selector: 'transaction-modal',
@@ -46,7 +47,7 @@ export class TransactionModalComponent {
 
   constructor(public viewCtrl: ViewController, public transactionsProvider: TransactionsProvider,
     public categoriesProvider: CategoriesProvider, public accountsProvider: AccountsProvider, public navParams: NavParams,
-    public events: Events, public moneyProvider: MoneyProvider, public formBuilder: FormBuilder) {
+    public events: Events, public moneyProvider: MoneyProvider, public formBuilder: FormBuilder, public sorter: SorterProvider) {
 
     this.commonForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -82,11 +83,17 @@ export class TransactionModalComponent {
     }
 
     this.categoriesProvider.getAllCategories().then(
-      result => { this.categories = result }
+      result => {
+        result.sort(this.sorter.sortByName);
+        this.categories = result
+      }
     )
 
     this.accountsProvider.getAccounts().then(
-      result => { this.accounts = result }
+      result => {
+        result.sort(this.sorter.sortByName);
+        this.accounts = result;
+      }
     )
   }
 
