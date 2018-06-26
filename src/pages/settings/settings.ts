@@ -28,7 +28,7 @@ export class SettingsPage {
   }
 
   openThanksTo(){
-    let browser = this.iab.create('http://aspirebudget.com/thanksto.html', '_blank', 'location=yes');
+    let browser = this.iab.create('http://aspirebudget.com/acknowledge.html', '_blank', 'location=yes');
     browser.show();
   }
 
