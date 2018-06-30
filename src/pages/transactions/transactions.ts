@@ -7,6 +7,7 @@ import { Events } from 'ionic-angular';
 import { SorterProvider } from '../../providers/sorter/sorter';
 import { MoneyProvider } from '../../providers/money/money';
 import { AccountsProvider } from '../../providers/accounts/accounts';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'page-transactions',
@@ -26,6 +27,10 @@ export class TransactionsPage {
   filterItems = [];
   isFiltering = false;
   @ViewChild('content') content: Content;
+  pendingHeaderDates = [];
+  pendingGroupedObject = {};
+  clearedHeaderDates = [];
+  clearedGroupedObject = {};
 
   constructor(public navCtrl: NavController, public transactionsProvider: TransactionsProvider, public categoriesProvider: CategoriesProvider,
     public modalCtrl: ModalController, public events: Events, public sorter: SorterProvider, public moneyProvider: MoneyProvider,
@@ -35,6 +40,27 @@ export class TransactionsPage {
     });
 
     this.refreshTransactions();
+  }
+
+  isDifferentDate(prevDate, curDate){
+    prevDate = new Date(prevDate);
+    curDate = new Date(curDate);
+
+    prevDate = (prevDate.getMonth() + 1) + "/" +  prevDate.getDate() + "/" +  prevDate.getFullYear();
+    curDate = (curDate.getMonth() + 1) + "/" +  curDate.getDate() + "/" +  curDate.getFullYear();
+
+    if (curDate != prevDate){
+      return true;
+    }
+    else{
+      return false;
+    }
+    
+  }
+
+  getSimpleDate(date){
+    date = new Date(date);
+    return (date.getMonth() + 1) + "/" +  date.getDate() + "/" +  date.getFullYear();
   }
 
   refreshTransactions() {
@@ -52,11 +78,24 @@ export class TransactionsPage {
               result => {
                 result.sort(this.sorter.sortByDate);
                 this.pendingTransactions = result;
-
                 for (let i = 0; i < this.pendingTransactions.length; i++) {
                   this.pendingTransactions[i].categoryName = this.getCategoryName(this.pendingTransactions[i].sourceCatId, this.pendingTransactions[i].destCatId);
                   this.pendingTransactions[i].accountName = this.getAccountName(this.pendingTransactions[i].sourceAcctId, this.pendingTransactions[i].destAcctId);
+                  this.pendingTransactions[i].simpleDate = this.getSimpleDate(this.pendingTransactions[i].date);
+                  
+                  //this.pendingTransactions[i].dateDivider = false;
+
+                  // if(i == 0){
+                  //   this.pendingTransactions[i].dateDivider = true;
+                  // }
+                  // else if(i > 0 && this.isDifferentDate(this.pendingTransactions[i-1].date, this.pendingTransactions[i].date)){
+                  //   this.pendingTransactions[i].dateDivider = true;
+                  // }
                 }
+                this.pendingGroupedObject = _.groupBy(this.pendingTransactions, 'simpleDate');
+                this.pendingHeaderDates = Object.keys(this.pendingGroupedObject).sort(this.sorter.sortByDate);
+                
+
               });
 
             this.transactionsProvider.getClearedTransactions().then(
@@ -66,6 +105,7 @@ export class TransactionsPage {
                 for (let i = 0; i < this.allClearedTransactions.length; i++) {
                   this.allClearedTransactions[i].categoryName = this.getCategoryName(this.allClearedTransactions[i].sourceCatId, this.allClearedTransactions[i].destCatId);
                   this.allClearedTransactions[i].accountName = this.getAccountName(this.allClearedTransactions[i].sourceAcctId, this.allClearedTransactions[i].destAcctId);
+                  this.allClearedTransactions[i].simpleDate = this.getSimpleDate(this.allClearedTransactions[i].date);
                 }
 
                 for (let i = 0; i < this.loadMoreCount; i++) {
@@ -77,6 +117,8 @@ export class TransactionsPage {
                   }
                   this.transactionIterator++
                 }
+                this.clearedGroupedObject = _.groupBy(this.clearedTransactions, 'simpleDate');
+                this.clearedHeaderDates = Object.keys(this.clearedGroupedObject).sort(this.sorter.sortByDate);
               });
           });
       });
@@ -94,6 +136,8 @@ export class TransactionsPage {
           }
           this.transactionIterator++
         }
+        this.clearedGroupedObject = _.groupBy(this.clearedTransactions, 'simpleDate');
+        this.clearedHeaderDates = Object.keys(this.clearedHeaderDates).sort(this.sorter.sortByDate);
         resolve();
       }, 500);
     })

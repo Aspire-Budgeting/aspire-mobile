@@ -6,6 +6,12 @@ page-transactions{
         font-weight: bold;
     }
 
+    ion-list{
+        margin: -1px 0 9px 0 !important;
+        // 
+        // border-bottom: 0.55px solid #c8c7cc;
+    }
+
     .category-name{
         @include basic-name();
     }
@@ -30,19 +36,11 @@ page-transactions{
 
     .ellipses-right{
         display: block;
-        width: 150px;
+        width: 160px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         text-align: right;
-    }
-
-    .ellipses-left{
-        display: block;
-        width: 130px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
     }
 
     .float-right{
@@ -56,4 +54,54 @@ page-transactions{
     .icon-margin{
         margin: 0 3px 0 0;
     }
+
+    // div{
+    //     border:1px solid black;
+    //     margin:5px;
+    //     font-size:100px;
+    //   }
+      
+      .line{
+        width:1000px;
+      }
+      
+      .row1{
+        display:flex;
+        align-items:center;
+        
+        .titleContainer{
+          flex-grow:1;
+          justify-content:space-between;
+          flex-basis:0;
+          overflow:hidden;
+      
+          .desc{
+            overflow:hidden;
+            white-space:nowrap;
+            text-overflow:ellipsis;
+          }
+          .amt{
+            text-overflow:ellipsis;
+      
+          }
+        }
+        .date{
+          flex-grow:1;
+        }
+      }
+      
+      .row2{
+        display:flex;
+      
+        .date{
+          flex-grow:1;
+        }  
+        .bank{
+          text-align:right;
+          width:50%;
+          overflow:hidden;
+          text-overflow:ellipsis;
+          white-space:nowrap;
+        }
+      }
 }
