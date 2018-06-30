@@ -6,10 +6,26 @@ import { CategoriesProvider } from '../../providers/categories/categories';
 import { TransactionsProvider } from '../../providers/transactions/transactions';
 import { MoneyProvider } from '../../providers/money/money';
 import { Events } from 'ionic-angular';
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  query,
+  stagger
+} from '@angular/animations';
 
 @Component({
   selector: 'page-dashboard',
-  templateUrl: 'dashboard.html'
+  templateUrl: 'dashboard.html',
+  animations: [
+    trigger('staggerIn', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0, transform: `translate3d(0,10px,0)` }), { optional: true }),
+        query(':enter', stagger('75ms', [animate('300ms', style({ opacity: 1, transform: `translate3d(0,0,0)` }))]), { optional: true })
+      ])
+    ])
+  ]
 })
 export class DashboardPage {
   @ViewChild('content') content: Content;
