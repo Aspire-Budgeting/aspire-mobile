@@ -53,10 +53,10 @@
 
   <ion-item-divider class="header transaction-header" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
   <ion-list *ngFor='let key of pendingHeaderDates'>
-    <ion-list-header color="pondblue" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
+    <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
     <ion-item-sliding *ngFor='let transaction of pendingGroupedObject[key]' #slidingItem>
       <ion-item text-wrap>
-        <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
+        <ion-icon name="md-radio-button-off" item-start color="mediumgray"></ion-icon>
         <ion-label color=dark>{{transaction.name}}
           <div class="category-name">{{transaction.categoryName}}</div>
         </ion-label>
@@ -73,7 +73,7 @@
       </ion-item>
       <ion-item-options (ionSwipe)="clear(slidingItem, transaction._id)" side="left">
         <button class="swipe-buttons" ion-button expandable (click)="clear(slidingItem, transaction._id)">
-          <ion-icon name="md-lock"></ion-icon>
+          <ion-icon name="md-checkmark-circle"></ion-icon>
           CLEAR
         </button>
       </ion-item-options>
@@ -93,11 +93,11 @@
   <!-- PENDING TRANSACTIONS -->
 
   <!-- CLEARED TRANSACTIONS -->
-  <ion-item-divider class="header transaction-header" *ngIf="clearedTransactions.length != 0" color="headercolor">Cleared Transactions</ion-item-divider>
+  <ion-item-divider class="header transaction-header" *ngIf="clearedTransactions != 0" color="headercolor">Cleared Transactions</ion-item-divider>
   <ion-list *ngFor='let key of clearedHeaderDates'>
     <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
     <ion-item text-wrap *ngFor='let transaction of clearedGroupedObject[key]'>
-      <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
+      <ion-icon style="color: #9FD1B7;" name="md-checkmark-circle" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
         <div class="category-name">{{transaction.categoryName}}</div>
       </ion-label>
