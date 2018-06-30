@@ -13,12 +13,13 @@ move-money-modal {
   
   .sum-category {
     @include categoryAmount();
-    background-color: map-get($colors, graphite);
+    background-color: map-get($colors, darkgray);
   }
 
    @mixin moveMoneyHeader{
-    color: #535354;
-    font-size: 18px;
+    color: map-get($colors, darkgray);
+    font-size: 1.25rem;
+    font-weight: bold;
     padding: 5px 0 5px 0;
     border-top: 1px solid lighten(map-get($colors, mediumgray), 10%);
     border-bottom: 1px solid lighten(map-get($colors, mediumgray), 10%);
@@ -43,7 +44,7 @@ move-money-modal {
   }
 
   .moveMoneyText{
-    color: #535354;
+    color: map-get($colors, darkgray);
     font-size: 16px;
   }
 

@@ -18,7 +18,7 @@ export class TransactionsPage {
   showSearchbar: boolean = false;
   noMoreTransactions: boolean = false;
   transactionIterator: number = 0;
-  loadMoreCount: number = 25;
+  loadMoreCount: number = 3;
   pendingTransactions = [];
   clearedTransactions = [];
   allClearedTransactions = [];
@@ -38,24 +38,14 @@ export class TransactionsPage {
     events.subscribe('transaction:saved', () => {
       this.refreshTransactions();
     });
+    events.subscribe('account:added', () => {
+      this.refreshTransactions();
+    });
+    events.subscribe('categories:changed', () => {
+      this.refreshTransactions();
+    });
 
     this.refreshTransactions();
-  }
-
-  isDifferentDate(prevDate, curDate){
-    prevDate = new Date(prevDate);
-    curDate = new Date(curDate);
-
-    prevDate = (prevDate.getMonth() + 1) + "/" +  prevDate.getDate() + "/" +  prevDate.getFullYear();
-    curDate = (curDate.getMonth() + 1) + "/" +  curDate.getDate() + "/" +  curDate.getFullYear();
-
-    if (curDate != prevDate){
-      return true;
-    }
-    else{
-      return false;
-    }
-    
   }
 
   getSimpleDate(date){
@@ -82,20 +72,9 @@ export class TransactionsPage {
                   this.pendingTransactions[i].categoryName = this.getCategoryName(this.pendingTransactions[i].sourceCatId, this.pendingTransactions[i].destCatId);
                   this.pendingTransactions[i].accountName = this.getAccountName(this.pendingTransactions[i].sourceAcctId, this.pendingTransactions[i].destAcctId);
                   this.pendingTransactions[i].simpleDate = this.getSimpleDate(this.pendingTransactions[i].date);
-                  
-                  //this.pendingTransactions[i].dateDivider = false;
-
-                  // if(i == 0){
-                  //   this.pendingTransactions[i].dateDivider = true;
-                  // }
-                  // else if(i > 0 && this.isDifferentDate(this.pendingTransactions[i-1].date, this.pendingTransactions[i].date)){
-                  //   this.pendingTransactions[i].dateDivider = true;
-                  // }
                 }
                 this.pendingGroupedObject = _.groupBy(this.pendingTransactions, 'simpleDate');
                 this.pendingHeaderDates = Object.keys(this.pendingGroupedObject).sort(this.sorter.sortByDate);
-                
-
               });
 
             this.transactionsProvider.getClearedTransactions().then(
@@ -107,18 +86,7 @@ export class TransactionsPage {
                   this.allClearedTransactions[i].accountName = this.getAccountName(this.allClearedTransactions[i].sourceAcctId, this.allClearedTransactions[i].destAcctId);
                   this.allClearedTransactions[i].simpleDate = this.getSimpleDate(this.allClearedTransactions[i].date);
                 }
-
-                for (let i = 0; i < this.loadMoreCount; i++) {
-                  if (this.transactionIterator < this.allClearedTransactions.length) {
-                    this.clearedTransactions.push(this.allClearedTransactions[this.transactionIterator]);
-                  }
-                  else {
-                    this.noMoreTransactions = true;
-                  }
-                  this.transactionIterator++
-                }
-                this.clearedGroupedObject = _.groupBy(this.clearedTransactions, 'simpleDate');
-                this.clearedHeaderDates = Object.keys(this.clearedGroupedObject).sort(this.sorter.sortByDate);
+                this.loadClearedTransactionsList();
               });
           });
       });
@@ -127,20 +95,24 @@ export class TransactionsPage {
   doInfinite(): Promise<any> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        for (let i = 0; i < this.loadMoreCount; i++) {
-          if (this.transactionIterator < this.allClearedTransactions.length) {
-            this.clearedTransactions.push(this.allClearedTransactions[this.transactionIterator]);
-          }
-          else {
-            this.noMoreTransactions = true;
-          }
-          this.transactionIterator++
-        }
-        this.clearedGroupedObject = _.groupBy(this.clearedTransactions, 'simpleDate');
-        this.clearedHeaderDates = Object.keys(this.clearedHeaderDates).sort(this.sorter.sortByDate);
+        this.loadClearedTransactionsList();
         resolve();
       }, 500);
     })
+  }
+
+  loadClearedTransactionsList(){
+    for (let i = 0; i < this.loadMoreCount; i++) {
+      if (this.transactionIterator < this.allClearedTransactions.length) {
+        this.clearedTransactions.push(this.allClearedTransactions[this.transactionIterator]);
+      }
+      else {
+        this.noMoreTransactions = true;
+      }
+      this.transactionIterator++
+    }
+    this.clearedGroupedObject = _.groupBy(this.clearedTransactions, 'simpleDate');
+    this.clearedHeaderDates = Object.keys(this.clearedGroupedObject).sort(this.sorter.sortByDate);
   }
 
   getAccountName(sourceId, destId) {

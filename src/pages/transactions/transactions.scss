@@ -1,107 +1,116 @@
-page-transactions{
-    @mixin basic-name{
-        padding-right: 3px;
-        color: map-get($colors, phantomgray);
-        font-size: 14px;
-        font-weight: bold;
-    }
+page-transactions {
+  @mixin basic-name {
+    padding-right: 3px;
+    color: map-get($colors, lakeblue);
+    font-size: 0.75em;
+    font-weight: bold;
+  }
 
-    ion-list{
-        margin: -1px 0 9px 0 !important;
-        // 
-        // border-bottom: 0.55px solid #c8c7cc;
-    }
+  ion-list {
+    margin: -1px 0 9px 0 !important;
+  }
 
-    .category-name{
-        @include basic-name();
-    }
+  .transaction-header {
+    margin-bottom: 1px;
+  }
 
-    .inflow-account-name{
-        @include basic-name();
-        float: right;
-        color: map-get($colors, wintergreen);
-    }
+  .transaction-date-divider {
+    border-top: 0.55px solid #c8c7cc;
+    min-height: 18px;
+    height: 18px !important;
+    font-size: 1em;
+    color: map-get($colors, darkgray);
+  }
 
-    .outflow-account-name{
-        @include basic-name();
-        float: right;
-        color: map-get($colors, cardinalred);
-    }
+  .category-name {
+    @include basic-name();
+  }
 
-    .transfer-account-name{
-        @include basic-name();
-        float: right;
-        color: map-get($colors, buttonblue);
-    }
+  .inflow-account-name {
+    @include basic-name();
+    float: right;
+    color: map-get($colors, wintergreen);
+  }
 
-    .ellipses-right{
-        display: block;
-        width: 160px;
+  .outflow-account-name {
+    @include basic-name();
+    float: right;
+    color: map-get($colors, cardinalred);
+  }
+
+  .transfer-account-name {
+    @include basic-name();
+    float: right;
+    color: map-get($colors, buttonblue);
+  }
+
+  .ellipses-right {
+    display: block;
+    width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .top-spacer {
+    padding-top: 38px;
+  }
+
+  .icon-margin {
+    margin: 0 3px 0 0;
+  }
+
+  // div{
+  //     border:1px solid black;
+  //     margin:5px;
+  //     font-size:100px;
+  //   }
+
+  .line {
+    width: 1000px;
+  }
+
+  .row1 {
+    display: flex;
+    align-items: center;
+
+    .titleContainer {
+      flex-grow: 1;
+      justify-content: space-between;
+      flex-basis: 0;
+      overflow: hidden;
+
+      .desc {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        text-align: right;
-    }
-
-    .float-right{
-        float: right;
-    }
-
-    .top-spacer{
-        padding-top: 38px;
-    }
-
-    .icon-margin{
-        margin: 0 3px 0 0;
-    }
-
-    // div{
-    //     border:1px solid black;
-    //     margin:5px;
-    //     font-size:100px;
-    //   }
-      
-      .line{
-        width:1000px;
       }
-      
-      .row1{
-        display:flex;
-        align-items:center;
-        
-        .titleContainer{
-          flex-grow:1;
-          justify-content:space-between;
-          flex-basis:0;
-          overflow:hidden;
-      
-          .desc{
-            overflow:hidden;
-            white-space:nowrap;
-            text-overflow:ellipsis;
-          }
-          .amt{
-            text-overflow:ellipsis;
-      
-          }
-        }
-        .date{
-          flex-grow:1;
-        }
+      .amt {
+        text-overflow: ellipsis;
       }
-      
-      .row2{
-        display:flex;
-      
-        .date{
-          flex-grow:1;
-        }  
-        .bank{
-          text-align:right;
-          width:50%;
-          overflow:hidden;
-          text-overflow:ellipsis;
-          white-space:nowrap;
-        }
-      }
+    }
+    .date {
+      flex-grow: 1;
+    }
+  }
+
+  .row2 {
+    display: flex;
+
+    .date {
+      flex-grow: 1;
+    }
+    .bank {
+      text-align: right;
+      width: 50%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }

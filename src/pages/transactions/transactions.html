@@ -51,9 +51,9 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-item-divider class="header" style="margin-bottom: 1px" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
+  <ion-item-divider class="header transaction-header" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
   <ion-list *ngFor='let key of pendingHeaderDates'>
-    <ion-list-header color="pondblue" style="border-top: 0.55px solid #c8c7cc; min-height: 18px; height: 18px !important; font-size: 1em">{{key | date:'mediumDate'}}</ion-list-header>
+    <ion-list-header color="pondblue" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
     <ion-item-sliding *ngFor='let transaction of pendingGroupedObject[key]' #slidingItem>
       <ion-item text-wrap>
         <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
@@ -93,9 +93,9 @@
   <!-- PENDING TRANSACTIONS -->
 
   <!-- CLEARED TRANSACTIONS -->
-  <ion-item-divider class="header" style="margin-bottom: 1px" *ngIf="clearedTransactions.length != 0" color="headercolor">Cleared Transactions</ion-item-divider>
+  <ion-item-divider class="header transaction-header" *ngIf="clearedTransactions.length != 0" color="headercolor">Cleared Transactions</ion-item-divider>
   <ion-list *ngFor='let key of clearedHeaderDates'>
-    <ion-list-header color="pondblue" style="border-top: 0.55px solid #c8c7cc; min-height: 18px; height: 18px !important; font-size: 1em">{{key | date:'mediumDate'}}</ion-list-header>
+    <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
     <ion-item text-wrap *ngFor='let transaction of clearedGroupedObject[key]'>
       <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
