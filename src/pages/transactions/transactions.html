@@ -51,66 +51,7 @@
     </ion-card-content>
   </ion-card>
 
-
-  <!-- PENDING TRANSACTIONS -->
-  <!--<ion-item>
-        <ion-icon name="md-unlock" item-start color="mediumgray"></ion-icon>
-
-         <div class="row1">
-          <div class="titleContainer">
-            <div style="font-size: 1.1em;" class="title">
-              oot
-            </div>
-            <div class="desc">
-              bology this is the description ooo yeah
-            </div>
-          </div>
-
-          <div class="amt">
-            <span [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
-              <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Inflow'" name="md-arrow-round-down" color="wintergreen"></ion-icon>
-              <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Transfer'" name="md-swap" color="buttonblue"></ion-icon>
-              <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Outflow'" name="md-arrow-round-up" color="cardinalred"></ion-icon>
-              {{transaction.amount/100 | currency}}</span>
-          </div>
-        </div>
-        <div class="row2">
-          <div style="color: #666667"class="date">
-            junith
-          </div>
-          <div class="bank">
-            bank my boooloy asdf adsf
-          </div>
-        </div>
-      </ion-item> -->
-  <!-- <ion-item>
-          <div style="display: flex; justify-content: space-between;">
-          <div style="display: flex; flex-direction: column;">
-            <div>
-              {{transaction.name}}
-            </div>
-            <div>
-              {{transaction.categoryName}}
-            </div>
-          </div>
-          <div style="margin-top: 7px;">
-              <span [ngClass]="transaction.direction == 'Inflow'  ? 'pos-category' : (transaction.direction == 'Outflow' ? 'neg-category' : 'transfer-category')">
-                  <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Inflow'" name="md-arrow-round-down" color="wintergreen"></ion-icon>
-                  <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Transfer'" name="md-swap" color="buttonblue"></ion-icon>
-                  <ion-icon class="icon-margin" *ngIf="transaction.direction == 'Outflow'" name="md-arrow-round-up" color="cardinalred"></ion-icon>
-                  {{transaction.amount/100 | currency}}</span>
-          </div>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-          <div>
-            {{transaction.date | date:'mediumDate'}}
-          </div>
-          <div style="margin-left: 20px; text-overflow: ellipsis;">
-            {{transaction.accountName}}
-          </div>
-        </div>
-      </ion-item> -->
-  <ion-item-divider style="margin-bottom: 1px" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
+  <ion-item-divider class="header" style="margin-bottom: 1px" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
   <ion-list *ngFor='let key of pendingHeaderDates'>
     <ion-list-header color="pondblue" style="border-top: 0.55px solid #c8c7cc; min-height: 18px; height: 18px !important; font-size: 1em">{{key | date:'mediumDate'}}</ion-list-header>
     <ion-item-sliding *ngFor='let transaction of pendingGroupedObject[key]' #slidingItem>
@@ -152,7 +93,7 @@
   <!-- PENDING TRANSACTIONS -->
 
   <!-- CLEARED TRANSACTIONS -->
-  <ion-item-divider style="margin-bottom: 1px" *ngIf="clearedTransactions.length != 0" color="headercolor">Cleared Transactions</ion-item-divider>
+  <ion-item-divider class="header" style="margin-bottom: 1px" *ngIf="clearedTransactions.length != 0" color="headercolor">Cleared Transactions</ion-item-divider>
   <ion-list *ngFor='let key of clearedHeaderDates'>
     <ion-list-header color="pondblue" style="border-top: 0.55px solid #c8c7cc; min-height: 18px; height: 18px !important; font-size: 1em">{{key | date:'mediumDate'}}</ion-list-header>
     <ion-item text-wrap *ngFor='let transaction of clearedGroupedObject[key]'>
