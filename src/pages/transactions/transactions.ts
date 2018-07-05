@@ -26,11 +26,14 @@ export class TransactionsPage {
   accounts = [];
   filterItems = [];
   isFiltering = false;
-  @ViewChild('content') content: Content;
+  @ViewChild('filterContent') filterContent: Content;
+  @ViewChild('mainContent') mainContent: Content;
   pendingHeaderDates = [];
   pendingGroupedObject = {};
   clearedHeaderDates = [];
   clearedGroupedObject = {};
+  filterHeaderDates = [];
+  filterGroupedObject = {};
 
   constructor(public navCtrl: NavController, public transactionsProvider: TransactionsProvider, public categoriesProvider: CategoriesProvider,
     public modalCtrl: ModalController, public events: Events, public sorter: SorterProvider, public moneyProvider: MoneyProvider,
@@ -181,8 +184,11 @@ export class TransactionsPage {
           for (let i = 0; i < this.filterItems.length; i++) {
             this.filterItems[i].categoryName = this.getCategoryName(this.filterItems[i].sourceCatId, this.filterItems[i].destCatId);
             this.filterItems[i].accountName = this.getAccountName(this.filterItems[i].sourceAcctId, this.filterItems[i].destAcctId);
+            this.filterItems[i].simpleDate = this.getSimpleDate(this.filterItems[i].date);
           }
-          this.content.resize();
+          this.filterGroupedObject = _.groupBy(this.filterItems, 'simpleDate');
+          this.filterHeaderDates = Object.keys(this.filterGroupedObject).sort(this.sorter.sortByDate);
+          this.filterContent.resize();
         }
       )
     }
@@ -191,7 +197,7 @@ export class TransactionsPage {
   closeSearchbar() {
     this.showSearchbar = !this.showSearchbar;
     this.isFiltering = false;
-    this.content.resize();
+    this.mainContent.resize();
   }
 
   clear(slidingItem: ItemSliding, id) {

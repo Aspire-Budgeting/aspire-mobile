@@ -14,19 +14,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isFiltering == true" class="app-background" #content>
-  <ion-item-divider class="header" color="headercolor">Filtered Transactions</ion-item-divider>
+<!-- FILTER TRANSACTIONS -->
+<ion-content [hidden]="isFiltering == false" class="app-background" #filterContent>
   <ion-card class="empty-card" *ngIf="filterItems.length == 0">
     <ion-card-content>
       No transactions found matching your criteria.
     </ion-card-content>
   </ion-card>
-  <ion-list>
-    <ion-item text-wrap *ngFor='let transaction of filterItems'>
-      <ion-icon name="md-lock" item-start color="mediumgray"></ion-icon>
+  <ion-list *ngFor='let key of filterHeaderDates'>
+    <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
+    <ion-item text-wrap *ngFor='let transaction of filterGroupedObject[key]'>
+      <ion-icon name="md-checkmark-circle-outline" item-start color="lightgreen"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
-        <div class="category-name ellipses-left">{{transaction.categoryName}}</div>
-        <p>{{transaction.date | date:'mediumDate'}}</p>
+        <div class="category-name">{{transaction.categoryName}}</div>
       </ion-label>
 
       <ion-note item-end>
@@ -41,8 +41,10 @@
     </ion-item>
   </ion-list>
 </ion-content>
+<!-- FILTER TRANSACTIONS -->
 
-<ion-content *ngIf="isFiltering == false" class="app-background" #content>
+
+<ion-content [hidden]="isFiltering == true" class="app-background" #mainContent>
 
   <!--NO TRANSACTIONS-->
   <ion-card text-center class="empty-card" *ngIf="pendingTransactions.length == 0 && clearedTransactions.length == 0">
@@ -51,6 +53,7 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- CLEARED TRANSACTIONS -->
   <ion-item-divider class="header transaction-header" *ngIf="pendingTransactions.length != 0" color="headercolor">Pending Transactions</ion-item-divider>
   <ion-list *ngFor='let key of pendingHeaderDates'>
     <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
@@ -97,7 +100,7 @@
   <ion-list *ngFor='let key of clearedHeaderDates'>
     <ion-list-header color="lightgray" class="transaction-date-divider">{{key | date:'longDate'}}</ion-list-header>
     <ion-item text-wrap *ngFor='let transaction of clearedGroupedObject[key]'>
-      <ion-icon style="color: #9FD1B7;" name="md-checkmark-circle-outline" item-start color="mediumgray"></ion-icon>
+      <ion-icon name="md-checkmark-circle-outline" item-start color="lightgreen"></ion-icon>
       <ion-label color=dark>{{transaction.name}}
         <div class="category-name">{{transaction.categoryName}}</div>
       </ion-label>
