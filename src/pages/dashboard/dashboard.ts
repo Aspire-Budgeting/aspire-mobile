@@ -35,6 +35,10 @@ export class DashboardPage {
 
   }
 
+  round(atob){
+    return Number(Number(atob).toFixed(2));
+  }
+
   getDaysLeftInMonth() {
     let date = new Date();
     this.daysLeftInMonth = 1 + new Date(date.getFullYear(), date.getMonth(), 0).getDate() - date.getDate();
