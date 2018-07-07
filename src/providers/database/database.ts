@@ -208,7 +208,6 @@ export class DatabaseProvider {
       name: account.name,
       amount: 100 * Number(account.amount),
       type: account.type,
-      cardClass: account.cardClass
     }).then(function (response) {
       return response;
     }).catch(function (err) {

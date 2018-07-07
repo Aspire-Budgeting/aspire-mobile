@@ -20,6 +20,7 @@ export class DashboardPage {
   columnSetting: string = "AVAILABLE";
   pendingTransactions: number = 0;
   daysLeftInMonth: number = 0;
+  atobClass: Number = 0;
 
   constructor(public modalCtrl: ModalController, public categoriesProvider: CategoriesProvider,
     public moneyProvider: MoneyProvider, public events: Events, public transactionsProvider: TransactionsProvider) {
@@ -33,10 +34,6 @@ export class DashboardPage {
 
     this.refreshDashboard();
 
-  }
-
-  round(atob){
-    return Number(Number(atob).toFixed(2));
   }
 
   getDaysLeftInMonth() {
@@ -89,6 +86,8 @@ export class DashboardPage {
     this.moneyProvider.getAvailableToBudget().then(
       (result) => {
         this.availableToBudget = result;
+        alert(this.availableToBudget.amount);
+        this.atobClass = Math.round(this.availableToBudget.amount);
         this.content.resize();
       });
   }
