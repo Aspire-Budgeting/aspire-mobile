@@ -113,7 +113,7 @@ export class MoveMoneyModalComponent {
     }
 
     let promiseStructure = this.transactionProvider.addTransaction(this.newTransactionData).then(
-      (result) => {
+      () => {
         return this.moneyProvider.getCategoryTotal(this.newTransactionData.destCatId).then(
           (catTotal1) => {
             return this.moneyProvider.updateCategoryAmount(this.newTransactionData.destCatId, catTotal1).then(
@@ -127,7 +127,7 @@ export class MoveMoneyModalComponent {
       })
 
     Promise.all([promiseStructure]).then(
-      result => {
+      () => {
         this.events.publish('dashboard:moneymoved');
         this.viewCtrl.dismiss();
       });
