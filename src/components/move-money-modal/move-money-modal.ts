@@ -98,6 +98,9 @@ export class MoveMoneyModalComponent {
   calculateSums() {
     this.targetCatAmount = (this.targetCatCalc === "+") ? Number(this.currentTargetCatAmount) + 100 * Number(this.newTransactionData.amount) : Number(this.currentTargetCatAmount) - 100 * Number(this.newTransactionData.amount);
     this.atobAmount = (this.atobCalc === "+") ? Number(this.currentAtob.amount) + 100 * Number(this.newTransactionData.amount) : Number(this.currentAtob.amount) - 100 * Number(this.newTransactionData.amount);
+
+    this.targetCatAmount = Number(Number(this.targetCatAmount).toFixed(2));
+    this.atobAmount = Number(Number(this.atobAmount).toFixed(2));
   }
 
   dismiss() {

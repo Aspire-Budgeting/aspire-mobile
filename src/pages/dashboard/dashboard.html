@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="dark">
-    <div [ngClass]="availableToBudget.amount > 0  ? 'pos-atob-amount' : (availableToBudget.amount < 0 ? 'neg-atob-amount' : 'zero-atob-amount')">{{availableToBudget.amount/100 | currency}}</div>
+    <div [ngClass]="availableToBudget.amount > 0  ? 'pos-atob-amount' : (availableToBudget.amount < 0 ? 'neg-atob-amount' : 'zero-atob-amount')">{{round(availableToBudget.amount/100) | currency}}</div>
     <div class="atob-text">Available to budget
 
     </div>
