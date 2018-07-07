@@ -44,18 +44,12 @@ export class DatabaseProvider {
     });
   }
 
-  updateAvailableToBudget(budget) {
-    return this._db.put(budget)
-      .then(result => { console.log(result) })
-      .catch(err => { console.log(err) })
-  }
-
   // TRANSACTIONS #######################################
   addTransaction(transaction) {
     return this._db.post({
       item: 'transaction',
       name: transaction.name,
-      amount: 100 * Number(transaction.amount),
+      amount: Math.round(100 * Number(transaction.amount)),
       sourceCatId: transaction.sourceCatId,
       sourceAcctId: transaction.sourceAcctId,
       destCatId: transaction.destCatId,
@@ -134,7 +128,7 @@ export class DatabaseProvider {
       destAcctId: null,
     }
     Object.assign(updatedTransaction, transaction);
-    updatedTransaction.amount = 100 * Number(updatedTransaction.amount);
+    updatedTransaction.amount = Math.round(100 * Number(updatedTransaction.amount));
     return this._db.put(updatedTransaction)
       .then(result => { console.log(result) })
       .catch(err => { console.log(err) })
@@ -206,7 +200,7 @@ export class DatabaseProvider {
     return this._db.post({
       item: 'account',
       name: account.name,
-      amount: 100 * Number(account.amount),
+      amount: Math.round(100 * Number(account.amount)),
       type: account.type,
     }).then(function (response) {
       return response;
@@ -264,7 +258,7 @@ export class DatabaseProvider {
   updateAccountAmount(id, amount) {
     return this.getAccountById(id).then(
       account => {
-        account.amount = Number(amount);
+        account.amount = Math.round(Number(amount));
         return this.updateAccount(account).then(function (response) {
         }).catch(function (err) {
           console.log(err);
@@ -300,8 +294,8 @@ export class DatabaseProvider {
     return this._db.post({
       item: 'category',
       name: name,
-      amount: 100 * Number(amount),
-      targetAmount: 100 * Number(targetAmount),
+      amount: Math.round(100 * Number(amount)),
+      targetAmount: Math.round(100 * Number(targetAmount)),
       parent: parent,
       userDefined: true,
     }).then(function (response) {
@@ -337,7 +331,7 @@ export class DatabaseProvider {
     return this.getCategoryById(id).then(
       category => {
         console.log(category);
-        category.amount = Number(amount);
+        category.amount = Math.round(Number(amount));
         return this.updateCategory(category).then(function (response) {
           console.log(response);
         }).catch(function (err) {

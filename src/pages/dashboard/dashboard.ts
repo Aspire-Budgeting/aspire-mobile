@@ -86,7 +86,6 @@ export class DashboardPage {
     this.moneyProvider.getAvailableToBudget().then(
       (result) => {
         this.availableToBudget = result;
-        alert(this.availableToBudget.amount);
         this.atobClass = Math.round(this.availableToBudget.amount);
         this.content.resize();
       });

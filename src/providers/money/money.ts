@@ -10,10 +10,6 @@ export class MoneyProvider {
     return this.database.getAvailableToBudget();
   }
 
-  updateAvailableToBudget(atob) {
-    return this.database.updateAvailableToBudget(atob);
-  }
-
   updateCategoryAmount(categoryId, amount) {
     return this.database.updateCategoryAmount(categoryId, amount);
   }
@@ -38,7 +34,7 @@ export class MoneyProvider {
         }
 
         return sum;
-      })
+      });
   }
 
   getAccountTotal(id) {
