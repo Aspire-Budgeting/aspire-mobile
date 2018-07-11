@@ -18,7 +18,7 @@ export class TransactionsPage {
   showSearchbar: boolean = false;
   noMoreTransactions: boolean = false;
   transactionIterator: number = 0;
-  loadMoreCount: number = 3;
+  loadMoreCount: number = 25;
   pendingTransactions = [];
   clearedTransactions = [];
   allClearedTransactions = [];
